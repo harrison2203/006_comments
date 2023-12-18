@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Log;
+
 
 
 class CommentController extends Controller
@@ -18,12 +20,14 @@ class CommentController extends Controller
 
 		if(Auth::check()){
 
+			$user = Auth::user();
+
 			$comment = new Comment([
 				'commentary' => $commentValidation['commentary'],
 				'post_id' => $postId,
-				'user_id' => Auth::id(),
 			]);
 
+			$comment->user()->associate($user);
 			$comment->post()->associate($postId);
 			$comment->save();
 

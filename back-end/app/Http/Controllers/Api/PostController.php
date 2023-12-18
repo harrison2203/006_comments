@@ -29,7 +29,7 @@ class PostController extends Controller
 	 */
 	public function createOnePost(Request $request)
 	{
-		$postValidation = $request -> validateText ([
+		$postValidation = $request -> validate ([
 			'title' => ['required', 'string'],
 			'content' => ['required', 'string'],
 		]);
