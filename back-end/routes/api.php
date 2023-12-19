@@ -48,18 +48,17 @@ Route::middleware('auth:sanctum')->group(function () {
 
 	//Route pour créer un post d'un utilisateur
 	Route::post('/user/{userId}/post/', [PostController::class, 'createOnePost']);
-
 	//Route qui récupère tous les posts d'un utilisateur
 	Route::get('/user/posts/{user_Id}', [PostController::class, 'showPosts']);
-
 	//Route pour l'update d'un post d'un utilisateur
 	Route::put('/user/{userId}/edit/{postId}', [PostController::class, 'updatePost']);
-
 	//Route pour effacer le post d'un utilisateur
 	Route::delete('/user/{userId}/delete/{postId}', [PostController::class, 'deletePost']);
 
+
 	//Route pour créer un commentaire
 	Route::post('/createComment/{postId}', [CommentController::class, 'createComment']);
+	Route::get('/comments/{postId}', [CommentController::class, 'getComments']);
 });
 
 

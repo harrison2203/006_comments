@@ -18,7 +18,7 @@ class PostController extends Controller
 		$posts = Post::all();
 
 		if(count($posts) > 0){
-			return response()->json(['message' => 'Your posts are:', 'post' => $posts], 200);
+			return response()->json(['message' => 'the posts published are', 'posts' => $posts], 200);
 		}else{
 			return response()->json(['message' => 'Any post has been published'], 404);
 		}

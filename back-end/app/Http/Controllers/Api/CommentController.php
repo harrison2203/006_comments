@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
-use Illuminate\Support\Facades\Log;
-
+use App\Models\Post;
 
 
 class CommentController extends Controller
@@ -39,5 +38,19 @@ class CommentController extends Controller
 		}else{
 				return response()->json(['message' => 'You are not connected'], 401);
 		}
-	} 
+	}
+
+	/**
+	 * Get all the comments from one post.
+	 */
+	public function getComments($postId)
+	{
+		if($postId){
+			$post = Post::findOrFail($postId);
+			$postComments = $post->comments;
+			return response()->json(['message' => 'Here are the comments', 'comments' => $postComments], 200);
+		}else{
+			return response()->json(['message' => 'a problem has occured'], 404);
+		}
+	}
 }
