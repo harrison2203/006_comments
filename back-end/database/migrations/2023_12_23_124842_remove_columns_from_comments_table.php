@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('comments', function (Blueprint $table) {
-             $table->text('commentary');
+					$table->dropColumn('user_id');
+					$table->dropColumn('post_id');
+
         });
     }
 

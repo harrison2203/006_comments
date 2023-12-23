@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('comments', function (Blueprint $table) {
-             $table->text('commentary');
+					$table->dropForeign(['user_id']);
+					$table->dropForeign(['post_id']);
         });
     }
 

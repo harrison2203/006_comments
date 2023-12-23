@@ -6,7 +6,6 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\CommentController;
-use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,9 +55,10 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::delete('/user/{userId}/delete/{postId}', [PostController::class, 'deletePost']);
 
 
-	//Route pour créer un commentaire
+	Route::get('/comments/', [CommentController::class, 'indexComments']);
 	Route::post('/createComment/{postId}', [CommentController::class, 'createComment']);
 	Route::get('/comments/{postId}', [CommentController::class, 'getComments']);
+	Route::delete('/user/{user_Id}/deleteComment/{commentId}', [CommentController::class, 'deleteComment']);
 });
 
 

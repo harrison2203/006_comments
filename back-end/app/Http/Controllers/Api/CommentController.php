@@ -11,6 +11,18 @@ use App\Models\Post;
 
 class CommentController extends Controller
 {
+
+	public function indexComments()
+	{
+		$comments = Comment::all();
+
+		if(count($comments) > 0){
+			return response()->json(['message' => 'the posts published are', 'posts' => $comments], 200);
+		}else{
+			return response()->json(['error' => 'Any post has been published'], 404);
+		}
+	}
+
 	public function createComment(Request $request, $postId)
 	{
 		$commentValidation = $request -> validate ([
@@ -51,6 +63,26 @@ class CommentController extends Controller
 			return response()->json(['message' => 'Here are the comments', 'comments' => $postComments], 200);
 		}else{
 			return response()->json(['message' => 'a problem has occured'], 404);
+		}
+	}
+
+	/**
+	 * Only the comment owner can delete his comment
+	 */
+	public function deleteComment( $userId, $commentId)
+	{
+		if(Auth::check()){
+			$userComment = Comment::where('id', $commentId)
+											->where('user_id', $userId)
+											->first();
+											
+			if($userComment){
+				Comment::destroy($commentId);
+				return response()->json(['message' => 'comment deleted']);
+
+			}else{
+				return response()->json(['error']);
+			}
 		}
 	}
 }

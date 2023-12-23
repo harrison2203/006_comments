@@ -20,47 +20,67 @@ class PostController extends Controller
 		if(count($posts) > 0){
 			return response()->json(['message' => 'the posts published are', 'posts' => $posts], 200);
 		}else{
-			return response()->json(['message' => 'Any post has been published'], 404);
+			return response()->json(['error' => 'Any post has been published'], 404);
 		}
 	}
 
 	/**
 	 * Create one post
 	 */
-	public function createOnePost(Request $request)
+	public function createOnePost(Request $request, $userId)
 	{
-		$postValidation = $request -> validate ([
-			'title' => ['required', 'string'],
-			'content' => ['required', 'string'],
-		]);
+			$existingUser = User::find($userId);
+	
+			if (!$existingUser) {
+					return response()->json(['error' => 'User not found'], 404);
+			}
+	
+			$postValidation = $request->validate([
+					'title' => ['required', 'string'],
+					'content' => ['required', 'string'],
+			]);
 
-		if (Auth::check()) {
-			$user = Auth::user();
+			if (Auth::check()) {
+					$loggedInUserId = Auth::id();
 
-			$post = new Post([
-				'title' => $postValidation['title'],
-				'content' => $postValidation['content'],
-		]);
-
-			$post->user()->associate($user);
-			$post->save();
-				return response()->json(['message' => 'Your post has been created', 'post' => $post], 200);
-		}else{
-			return response()->json(['message' => 'A problem has occured'], 404);
-		};
+					if ($loggedInUserId == $userId) {
+							$post = new Post([
+									'title' => $postValidation['title'],
+									'content' => $postValidation['content'],
+							]);
+	
+							$post->user()->associate($loggedInUserId);
+							$post->save();
+	
+							return response()->json(['message' => 'Your post has been created', 'post' => $post], 200);
+					}
+			}
+	
+			return response()->json(['error' => 'Non authorized access'], 403);
 	}
 
 	/**
 	 * Show all posts from one user (when user connected)
 	 */
-	public function showPosts($user_Id)
+	public function showPosts($userId)
 	{
-		if($user_Id){
-			$user = User::findOrFail($user_Id);
-			$userPosts = $user->posts;
-			return response()->json(['message' => 'Here are your posts', 'posts' => $userPosts], 200);
+		$existingUser = User::find($userId);
+
+		if(!$existingUser){
+			return response()->json(['error' => 'User not found'], 404);
+
 		}else{
-			return response()->json(['message' => 'User not found'], 404);
+
+			if (Auth::check()) {
+				$loggedInUserId = Auth::id();
+				if($existingUser->id == $loggedInUserId){
+
+					$userPosts = $existingUser->posts;
+					return response()->json(['message' => 'Here are your posts', 'posts' => $userPosts], 200);
+				}else{
+					return response()->json(['error' => 'Non authorized acces'], 403);
+				}
+			}
 		}
 	}
 
@@ -74,7 +94,7 @@ class PostController extends Controller
 		if($onePost){
 			return response()->json(['message' => 'Your post :', 'post' => $onePost], 200);
 		}else{
-			return response()->json(['message' => 'Post not found'], 404);
+			return response()->json(['error' => 'Post not found'], 404);
 	};
 }
 
@@ -83,11 +103,10 @@ class PostController extends Controller
 	 */
 	public function updatePost(Request $request, $userId, $postId)
 	{  
-
 		$postsValidation = $request ->validate ([
 				"title" => ["required","string"],
 				"content" => ["required", "string"],
-]);
+		]);
 
 		if(Auth::check()){
 			$userPost = Post::where('id', $postId)
@@ -99,7 +118,7 @@ class PostController extends Controller
 				return response()->json(['message' => 'your post', 'post' => $userPost], 201);
 
 			}else{
-				return response()->json(['message' => 'An error has occured'], 404);
+				return response()->json(['error' => 'Non authorized acces'], 403);
 			}
 
 		}else{
@@ -112,17 +131,16 @@ class PostController extends Controller
 	 */
 	public function deletePost($userId, $postId)
 	{
-
 		if(Auth::check()){
 			$userPost = Post::where('id', $postId)
-			->where('user_Id', $userId)
-			->first();
+											->where('user_Id', $userId)
+											->first();
 
 			if($userPost){
 				Post::destroy($postId);
 				return response()->json(['message' => 'Your post has been deleted'],201);
 			}else{
-				return response()->json(['message' => 'a problem has occurred'], 404);
+				return response()->json(['error' => 'Non authorized acces'], 403);
 			}
 		}else{
 			return response()->json(['message' => 'you are not connected'], 401);

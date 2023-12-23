@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
 
 class UserController extends Controller
 {
@@ -30,49 +33,62 @@ class UserController extends Controller
 	}
 
 	/**
-	 * Display one user by id
+	 * Display one user by id (connected user)
 	 */
-	public function showOneUser($id)
+	public function showOneUser($userId)
 	{
-		$user = User::findOrFail($id);
 
-		if(!$user){
-			return response()->json(['error' => 'User not found'], 404);
-		}else{
-			return response()->json(['user' => $user]);
+		if(Auth::check()){
+			$user = Auth::id();
+			$userInformation = User::find($userId);
+
+			if($user != $userInformation->id){
+				return response()->json(['error'=>'Non authorized acces'], 403);
+			}else{
+				return response()->json(['user' => $userInformation]);
+			}
 		}
 	}
 
 	/**
-	 * Update one user by id
+	 * Update one user by id (connected user)
 	 */
-	public function updateUser(Request $request, $id)
+	public function updateUser(Request $request, $userId)
 	{
 		$updateData = $request->validate ([
 			"name" => "string|nullable",
 			"email" => "email|nullable",
 		]);
-		$user = User::findOrFail($id);
-		
-		if(!$user){
-			return response()->json(['message' => 'No user found with this $id']);
+
+		$user = Auth::id();
+		$userInformation = User::find($userId);
+
+		if($user != $userInformation->id){
+			return response()->json(['error'=>'Non authorized acces'], 403);
 		}else{
-			$user->update($updateData);
-			return response()->json(['message:' => 'User updated', "user" => $user], 201);
+			$userInformation->update($updateData);
+			return response()->json(['message:' => 'User updated', "user" => $userInformation], 201);
 		}
 	}
 
 	/**
 	 * Delete an user
 	 */
-	public function deleteUser($id)
+	public function deleteUser($userId)
 	{
-		$user = User::find($id);
-		if(!$user){
-			return response()->json(['message' => 'User not found'], 404);
+		$user = Auth::id();
+		$userInformation = User::find($userId);
+
+		if($userInformation){
+
+			if($user != $userInformation->id){
+				return response()->json(['message' => 'Non authorized acces'], 404);
+			}else{
+				$userInformation-> delete();
+				return response()->json(['message' => 'User deleted succesfully'], 201);
+			}
 		}else{
-			$user-> delete();
-			return response()->json(['message' => 'User deleted succesfully'], 201);
+			return response()->json(['message' => 'user not found'], 404);
 		}
 	}
 }
