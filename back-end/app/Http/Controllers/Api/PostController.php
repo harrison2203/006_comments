@@ -15,7 +15,8 @@ class PostController extends Controller
 	 */
 	public function indexPost()
 	{
-		$posts = Post::all();
+
+		$posts = Post::orderBy('created_at', 'desc')->with('user')->get();
 
 		if(count($posts) > 0){
 			return response()->json(['message' => 'the posts published are', 'posts' => $posts], 200);
@@ -90,6 +91,7 @@ class PostController extends Controller
 	public function showOnePost($postId)
 	{
 		$onePost = Post::findOrFail($postId);
+		//$posts = Post::orderBy('created_at', 'desc')->with('user')->get();
 
 		if($onePost){
 			return response()->json(['message' => 'Your post :', 'post' => $onePost], 200);
