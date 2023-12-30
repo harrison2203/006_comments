@@ -1,0 +1,66 @@
+@import './reset.css';
+
+:root{
+	--color-principal: white;
+	--color-secondary: #a1a1aa;
+	--color-background: #f2f7f9;
+	--color-post: #e4e4e7;
+	--color-transparent: transparent;
+
+	--color-icon: #b5b5b7;
+	--color-titles: #222222;
+	--color-subtitle: #888;
+	--color-text: #555;
+}
+
+html{
+	font-size: 10px;
+}
+
+body{
+	height: auto; /* se adapta al contenido */
+	font-family: "Poppins", Helvetica, sans-serif;
+	font-size: 1.5rem; /* 15px */
+	background-color: var(--color-background);
+	color: var(--color-text);
+}
+
+h1, h2, h3, h4, h5, h6{
+	color: var(--color-titles);
+}
+
+/* PostsComponent.vue */
+.main__container{
+	margin-top: 1rem;
+}
+.container__post{
+	background-color: var(--color-post);
+	margin-bottom: 1.5rem;
+	margin-left: 1.5rem;
+	width: 45rem;
+	padding: 2rem;
+}
+
+.post__router{
+	text-decoration: none;
+  color: var(	--color-titles);
+}
+.container__post:hover{
+	opacity:2;
+	background-color:#d4d4d8;
+}
+
+.post__title{
+	font-size: 2rem;
+}
+
+.post__content{
+	font-size: 1.3rem;
+}
+
+/* SinglePostComponent.vue*/
+
+
+
+
+
