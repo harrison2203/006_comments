@@ -17,9 +17,13 @@ class LoginController extends Controller
 
 				if (Auth::attempt($credentials)) {
 
+					$user = Auth::user();
 					$token = $request->user()->createToken('default');
 
-					return ['token' => $token->plainTextToken];
+					return [
+						'token' => $token->plainTextToken,
+						'user' => $user,
+					];
 
 			} else {
 
