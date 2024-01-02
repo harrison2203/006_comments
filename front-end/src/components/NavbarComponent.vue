@@ -1,41 +1,56 @@
 <script setup>
+import { RouterLink } from 'vue-router';
+import { ref } from 'vue'
+import { createToaster } from "@meforma/vue-toaster";
 
 </script>
 
 <template>
 
-	<nav class="navbar">
-			<div class="navbar_image">
-				<img src="../assets/img/logo.svg" class="image_logo" alt="icon_navbar">
-			</div>
-
-			<div class="navbar_menu">
-				<ul class="menu_list">
-					<li class="list_option">
-						<a class="list_link">Home</a>
-					</li>
-					<li class="list_option">
-						<a class="list_link">My account</a>
-					</li>
-				</ul>
-			</div>
-
-			<div class="navbar_input">
-				<input class="input_single" type="text" placeholder="Search...">
-			</div>
-
-		<div class="navbar_buttons">
-			<button class="buttons_option">
-				Login
-			</button>
-			<button class="buttons_option">
-				Sign-up
-			</button>
-			<button class="buttons_option">
-				Logout
-			</button>
+<nav class="navbar">
+		<div class="navbar_image">
+			<img src="../assets/img/logo.svg" class="image_logo" alt="icon_navbar">
 		</div>
-	</nav>
+
+		<div class="navbar_menu">
+			<ul class="menu_list">
+				<li class="list_option">
+					<a class="list_link">Home</a>
+				</li>
+				<li class="list_option">
+					<a class="list_link">My account</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="navbar_input">
+			<input class="input_single" type="text" placeholder="Search...">
+		</div>
+
+		<div class="create__button">
+			<RouterLink to="/submit">
+				<button class="button__post">Create</button>
+			</RouterLink>
+		</div>
+
+		<div class="dropdown">
+			<span>Connexion / Inscription</span>
+				<div class="dropdown__content">
+					<div>
+						<p>new User ?</p>
+						<RouterLink to="/register">
+							<button class="buttons_option">Sign Up</button>
+						</RouterLink>
+					</div>
+					<div>
+						<p>Old User ?</p>
+						<RouterLink to="/login">
+							<button>login</button>
+						</RouterLink>
+					</div>
+				</div>
+		</div>
+</nav>
 
 </template>
 
@@ -45,8 +60,8 @@
 	background-color: var(--color-secondary);
 	height: auto;
 	display: grid;
-	grid-template-areas: "image menu input buttons";
-	grid-template-columns: 10% 25% 35% 30%
+	grid-template-areas: "image menu input button content";
+	grid-template-columns: 10% 25% 35% 10% 30%
 }
 
 .navbar_image{
@@ -65,5 +80,26 @@
 
 .navbar_menu{
 	grid-area: menu;
+}
+
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown__content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown__content {
+  display: block;
 }
 </style>
