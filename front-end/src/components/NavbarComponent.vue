@@ -1,57 +1,89 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-import { ref } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import { createToaster } from "@meforma/vue-toaster";
+import LogoutComponent from '../components/LogoutComponent.vue';
+
+import { useAuthStore } from '@/stores/Auth';
+import MyAccountButtonComponent from './Buttons/MyAccountButtonComponent.vue';
+
+const authUser = useAuthStore();
+console.log('le store est ici', authUser);
+console.log('on regarde le state', authUser.isAuthenticated)
+
+const isLogged = computed(() => authUser.isAuthenticated);
+
+watchEffect(() => {
+  console.log('isAuthenticated changed:', authUser.isAuthenticated);
+});
+
+watchEffect(() => {
+  console.log('stateeeeee', isLogged.value);
+})
 
 </script>
 
 <template>
 
-<nav class="navbar">
-		<div class="navbar_image">
-			<img src="../assets/img/logo.svg" class="image_logo" alt="icon_navbar">
-		</div>
+	<nav class="navbar">
+			<div class="navbar_image">
+				<img src="../assets/img/logo.svg" class="image_logo" alt="icon_navbar">
+			</div>
 
-		<div class="navbar_menu">
-			<ul class="menu_list">
-				<li class="list_option">
-					<a class="list_link">Home</a>
-				</li>
-				<li class="list_option">
-					<a class="list_link">My account</a>
-				</li>
-			</ul>
-		</div>
-
-		<div class="navbar_input">
-			<input class="input_single" type="text" placeholder="Search...">
-		</div>
-
-		<div class="create__button">
-			<RouterLink to="/submit">
-				<button class="button__post">Create</button>
-			</RouterLink>
-		</div>
-
-		<div class="dropdown">
-			<span>Connexion / Inscription</span>
-				<div class="dropdown__content">
-					<div>
-						<p>new User ?</p>
-						<RouterLink to="/register">
-							<button class="buttons_option">Sign Up</button>
+			<div class="navbar_menu">
+				<ul class="menu_list">
+					<li class="list_option">
+						<RouterLink to="/">
+							<a class="list_link">Home</a>
 						</RouterLink>
-					</div>
-					<div>
-						<p>Old User ?</p>
-						<RouterLink to="/login">
-							<button>login</button>
-						</RouterLink>
+					</li>
+					<li class="list_option">
+							<MyAccountButtonComponent/>
+					</li>
+				</ul>
+			</div>
+
+			<div class="navbar_input">
+				<input class="input_single" type="text" placeholder="Search...">
+			</div>
+
+			<div class="create__button">
+				<RouterLink to="/submit">
+					<button class="button__post">Create</button>
+				</RouterLink>
+			</div>
+
+				<div v-if="!isLogged">
+					<div class="dropdown">
+					<span>Connexion / Inscription</span>
+					<div class="dropdown__content">
+						<div>
+							<p>new User ?</p>
+							<RouterLink to="/register">
+								<button class="buttons__option">Sign Up</button>
+							</RouterLink>
+						</div>
+						<div>
+							<p>Old User ?</p>
+							<RouterLink to="/login">
+								<button>login</button>
+							</RouterLink>
+						</div>
 					</div>
 				</div>
-		</div>
-</nav>
+			</div>
 
+				<div v-else>
+				<div class="dropdown">
+					<span>Hello</span>
+					<div class="dropdown__content">
+						<div>
+							<LogoutComponent/>
+						</div>
+					</div>
+				</div>
+			</div>
+	</nav>
 </template>
 
 <style scoped>
@@ -61,7 +93,7 @@ import { createToaster } from "@meforma/vue-toaster";
 	height: auto;
 	display: grid;
 	grid-template-areas: "image menu input button content";
-	grid-template-columns: 10% 25% 35% 10% 30%
+	grid-template-columns: 10% 25% 35% 10% 20%
 }
 
 .navbar_image{

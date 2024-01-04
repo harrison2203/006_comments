@@ -11,6 +11,7 @@ export const useAuthStore = defineStore('Auth', () => {
 	const user = ref(null);
 
 	const setAuthData = (data) => {
+		console.log('Setting auth data:', data);
     isAuthenticated.value = true;
     token.value = data.token;
 		user.value = data.user;
@@ -28,14 +29,14 @@ export const useAuthStore = defineStore('Auth', () => {
 			if(accessToken){
 				axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 				toaster.success('login success');
-				console.log('la mega response', response.data);
+				console.log('la mega response', accessToken);
 			}else{
 				toaster.error('token is undefined')
 			}
 			setAuthData(response.data);
 		} catch (error) {
 			console.log('Login error', error);
-			toaster.error ('error has occurred');
+			toaster.error ('error has occurred pour le login');
 		}
 	};
 
@@ -48,10 +49,37 @@ export const useAuthStore = defineStore('Auth', () => {
     }
   });
 
+
+	async function Logout() {
+		try {
+			const response = await axios.post('http://localhost:8000/api/logout',
+			{},{
+				headers: {
+          Authorization: `Bearer ${token.value}`,
+				}
+			});
+
+			const accessToken = response.data.token;
+
+			if (accessToken === undefined || accessToken === null) {
+				toaster.success('logout success');
+				localStorage.removeItem('authData'); 
+				isAuthenticated.value = false;
+				return isAuthenticated.value;
+				
+			}else{
+				toaster.error('ERRORCITO')
+			}
+		} catch (error) {
+			toaster.error('You are already logged out');
+		}
+	}
+
 	return {
 		isAuthenticated,
 		token,
 		user,
 		Authentification,
+		Logout,
 	}
 })

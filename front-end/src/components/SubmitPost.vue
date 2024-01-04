@@ -2,6 +2,7 @@
 import { usePostStore } from '@/stores/Post';
 import {ref} from'vue';
 import { createToaster } from "@meforma/vue-toaster";
+import { RouterLink } from 'vue-router';
 
 const postCreator = usePostStore();
 const postTitle= ref("");
@@ -12,10 +13,11 @@ async function CreatePostComponent() {
   try {
     await postCreator.createPost(postTitle.value, postContent.value);
     toaster.success("Créé youpii");
-		console.log('post', postCreator)
+
+		postTitle.value = "";
+		postContent.value = "";
   } catch (error) {
     toaster.error("failed");
-    console.error(error);
   }
 }
 </script>
@@ -31,7 +33,9 @@ async function CreatePostComponent() {
 		</div>
 
 		<div>
-			<button @click="CreatePostComponent" type="submit">Create</button>
+			<RouterLink to="/">
+				<button @click="CreatePostComponent" type="submit">Create</button>
+			</RouterLink>
 		</div>
 	</form>
 </template>

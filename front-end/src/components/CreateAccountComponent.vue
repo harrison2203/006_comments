@@ -2,10 +2,8 @@
 import axios from 'axios'
 import { ref } from "vue";
 import { createToaster } from "@meforma/vue-toaster";
-import { useRoute } from 'vue-router';
 
 const toaster = createToaster();
-let route = useRoute();
 const userName = ref("");
 const userEmail = ref("");
 const userPassword = ref();

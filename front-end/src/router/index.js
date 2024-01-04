@@ -31,7 +31,13 @@ const router = createRouter({
 			path: '/submit',
 			name: 'submit',
 			component: () => import('../views/CreatePostView.vue')
-		}
+		},
+		{
+			path: '/my_Account/:id',
+			name: 'userAccount',
+			component: () => import('../views/UserAccountView.vue'),
+			props: true,
+		},
   ]
 })
 

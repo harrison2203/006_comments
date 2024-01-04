@@ -14,7 +14,6 @@ export const usePostStore = defineStore('Post', () => {
 	console.log('le store par ici', authStore)
 
 	async function createPost(title,content) {
-
 		try {
 			const userId = authStore.user.id;
 			const response = await axios.post(`http://localhost:8000/api/user/${userId}/post/`, {
