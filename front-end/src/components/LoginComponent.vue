@@ -1,13 +1,15 @@
 <script setup>
 import { useAuthStore } from '@/stores/Auth';
 import { RouterLink } from 'vue-router';
-import { ref } from 'vue'
+import { ref, defineEmits } from 'vue'
 import { createToaster } from "@meforma/vue-toaster";
 
 const authUser = useAuthStore();
 const userEmail = ref("");
 const userPassword = ref("");
 const toaster = createToaster();
+//const emits = defineEmits(['userLoggedIn']);
+
 
 async function loginUser() {
   try {
@@ -16,7 +18,8 @@ async function loginUser() {
 
 		userEmail.value = "";
     userPassword.value = "";
-		
+		//emits('userLoggedIn', true);
+
   } catch (error) {
     toaster.error("Login failed. Please check your credentials.");
     console.error(error);
@@ -36,12 +39,13 @@ async function loginUser() {
 				<input v-model="userPassword" type="password" id="password" name="user_password">
 			</li>
 		</ul>
-		<button @click="loginUser" type="submit">Login</button>
+		<RouterLink to="/">
+			<button @click="loginUser" type="submit">Login</button>
+		</RouterLink>
 	</form>
 </template>
 
 
 
 <style scoped>
-
 </style>

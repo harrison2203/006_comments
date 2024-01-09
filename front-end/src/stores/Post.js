@@ -24,7 +24,7 @@ export const usePostStore = defineStore('Post', () => {
           Authorization: `Bearer ${authStore.token}`,
 				}
 			});
-			toaster.success('Post created');
+			toaster.success('success request api');
 
 			// à voir s'il faut effacer ou pas 
 			isAuthenticated.value = true;
@@ -33,7 +33,7 @@ export const usePostStore = defineStore('Post', () => {
 
 		} catch (error) {
 			console.log('error', error);
-			toaster.error ('Post not created');
+			toaster.error ('Erro request for post api');
 		}
 	}
 	return {

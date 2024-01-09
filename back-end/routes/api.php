@@ -8,14 +8,12 @@ use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\CommentController;
 
-
 // Routes pour gérer le Login
 Route::get('login', function () {
 	return [
 		'login',
 	];
 })->name('login');
-
 
 // Route pour créer un utilisateur
 Route::post('create-user', [UserController::class, 'createUser']);
@@ -58,10 +56,12 @@ Route::get('/posts', [PostController::class, 'indexPost']);
 // Route pour récupérer un post par l'id
 Route::get('/post/{postId}', [PostController::class, 'showOnePost']);
 
+//Route pour récupérer tous les utilisateurs (non connectés)
+Route::get('/users', [UserController::class, 'indexUser']);
+
 
 
 //Route::post('test/{postId}', [PostController::class, 'updatePost']);
-
 Route::delete('/usersDelete', [AdminController::class, 'deleteUsers']);
 Route::delete('/postDelete', [AdminController::class, 'deletePosts']);
 Route::delete('/commentsDelete', [AdminController::class, 'deleteComments']);

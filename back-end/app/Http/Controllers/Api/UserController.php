@@ -12,6 +12,18 @@ use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
+
+	public function indexUser()
+	{
+		$users = User::all();
+
+		if(count($users) > 0){
+			return response()->json(['message' => 'the users are', 'users' => $users], 200);
+		}else{
+			return response()->json(['error' => 'Any user here'], 404);
+		}
+		}
+
 	/**
 	 * Create a new user
 	 */
@@ -56,7 +68,7 @@ class UserController extends Controller
 	public function updateUser(Request $request, $userId)
 	{
 		$updateData = $request->validate ([
-			"name" => "string|nullable",
+			"name" => "string|string",
 			"email" => "email|nullable",
 		]);
 
@@ -67,7 +79,7 @@ class UserController extends Controller
 			return response()->json(['error'=>'Non authorized acces'], 403);
 		}else{
 			$userInformation->update($updateData);
-			return response()->json(['message:' => 'User updated', "user" => $userInformation], 201);
+			return response()->json(['message' => 'User updated', "user" => $userInformation], 201);
 		}
 	}
 

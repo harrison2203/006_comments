@@ -1,30 +1,28 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import { ref, computed, watchEffect } from 'vue'
-import { createToaster } from "@meforma/vue-toaster";
 import LogoutComponent from '../components/LogoutComponent.vue';
-
 import { useAuthStore } from '@/stores/Auth';
+import { useUserStore } from '@/stores/User';
 import MyAccountButtonComponent from './Buttons/MyAccountButtonComponent.vue';
 
+const userStore = useUserStore();
 const authUser = useAuthStore();
 console.log('le store est ici', authUser);
 console.log('on regarde le state', authUser.isAuthenticated)
 
 const isLogged = computed(() => authUser.isAuthenticated);
+const noUser = computed(() => userStore.user)
 
 watchEffect(() => {
   console.log('isAuthenticated changed:', authUser.isAuthenticated);
+	console.log('User Value', noUser.value);
 });
 
-watchEffect(() => {
-  console.log('stateeeeee', isLogged.value);
-})
 
 </script>
 
 <template>
-
 	<nav class="navbar">
 			<div class="navbar_image">
 				<img src="../assets/img/logo.svg" class="image_logo" alt="icon_navbar">
@@ -53,7 +51,7 @@ watchEffect(() => {
 				</RouterLink>
 			</div>
 
-				<div v-if="!isLogged">
+				<div v-if="!isLogged || !noUser">
 					<div class="dropdown">
 					<span>Connexion / Inscription</span>
 					<div class="dropdown__content">

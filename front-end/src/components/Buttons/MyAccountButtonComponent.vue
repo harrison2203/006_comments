@@ -1,39 +1,37 @@
 <script setup>
-import {ref, watchEffect} from'vue';
+import { ref } from 'vue';
 import { createToaster } from "@meforma/vue-toaster";
 import { RouterLink } from 'vue-router';
 import { useUserStore } from '@/stores/User';
+import { useAuthStore } from '@/stores/Auth';
 
+const authUser = useAuthStore();
 const userStore = useUserStore();
 const toaster = createToaster();
 const patchValue = ref(null);
 
-
-// réagit de manière réactive aux changements permettant d'exécuter au bon moment la logique
-watchEffect(() => {
-  patchValue.value = userStore.Patch;
-});
-
-console.log('le test', userStore)
-
 async function userData() {
-  try {
-    await userStore.getUserById();
-    toaster.success("here your information");
-		console.log('la informacion por 	aca',userStore)
-		console.log('User id recuperé', patchValue.value);
+	try {
+    if (authUser.isAuthenticated) {
+      await userStore.getUserById();
+      toaster.success("here your information");
+      patchValue.value = userStore.user.id;
+    } else {
+      toaster.error('You are not connected');
+    }
   } catch (error) {
-    toaster.error("Nothing to see here ERROR!!!!! ");
+    toaster.error("The user is not authentified");
     console.error(error);
   }
 }
 
 userData();
 
+
 </script>
 
 <template>
-
+<div v-if="patchValue && authUser.isAuthenticated">
 	<RouterLink :to="{ name: 'userAccount', params: { id: patchValue } }">
 		<a class="list_link">
 			<slot>
@@ -41,7 +39,14 @@ userData();
 			</slot>
 		</a>
 	</RouterLink>
+</div>
 
+<div v-else>
+		<a class="list_link">
+			<slot>
+				<a>My account</a>
+			</slot>
+		</a>
+</div>
 
-		
 </template>

@@ -1,8 +1,14 @@
 <script setup>
-//import GetUsersComponent from '../components/GetUsersComponent.vue';
-import UserAccountComponent from '../components/UserAccountComponent.vue';
+import { ref } from'vue';
+import UpdateAccountComponent from '../components/UpdateAccountComponent.vue';
 import NavbarComponent from '../components/NavbarComponent.vue'
+import DeleteUserAccount from '../components/DeleteUserAccount.vue';
 
+const deletingUser = ref(false);
+
+function receiveEmit() {
+  deletingUser.value = true;
+}
 
 </script>
 
@@ -11,8 +17,17 @@ import NavbarComponent from '../components/NavbarComponent.vue'
     <NavbarComponent/>
 	</header>
 
-	<GetUsersComponent/>
-	<UserAccountComponent/>
+	<div v-if="deletingUser">
+		<DeleteUserAccount @eventHandler="receiveEmit"/>
+
+	</div>
+
+	<div v-else>
+		<UpdateAccountComponent/>
+		<DeleteUserAccount @eventHandler="receiveEmit"/>
+
+	</div>
+
 </template>
 
 <style scoped>
