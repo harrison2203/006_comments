@@ -73,7 +73,7 @@ watchEffect(() => {
 
 				<div v-else>
 				<div class="dropdown">
-					<span>Hello</span>
+					<span>Hello {{ userStore.user.name }}</span>
 					<div class="dropdown__content">
 						<div>
 							<LogoutComponent/>

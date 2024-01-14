@@ -1,7 +1,8 @@
 import { ref } from 'vue';
-import { defineStore } from 'pinia';
-import { createToaster } from "@meforma/vue-toaster";
 import axios from 'axios';
+import { createToaster } from "@meforma/vue-toaster";
+import { defineStore } from 'pinia';
+import { useRoute } from 'vue-router';
 import { useAuthStore } from '@/stores/Auth';
 
 export const usePostStore = defineStore('Post', () => {
@@ -9,9 +10,40 @@ export const usePostStore = defineStore('Post', () => {
 	const isAuthenticated = ref(null);
 	const user = ref(null);
 	const token = ref();
-
 	const authStore = useAuthStore();
-	console.log('le store par ici', authStore)
+	const posts = ref([]);
+	const post = ref([]);
+	let route = useRoute();
+
+	async function getPosts() {
+		try {
+			const response = await axios.get('http://localhost:8000/api/posts')
+
+			if(response.status === 200){
+				posts.value = response.data.posts;
+				toaster.success(`${response.data.message}`);
+			} else {
+				toaster.error('any post here');
+			}
+		} catch (error) {
+			console.log("something wrong happened")
+		}
+	}
+
+	async function getOnePost() {
+		try {
+			const response = await axios.get('http://localhost:8000/api/post/' + route.params.id)
+
+			if(response.status === 200){
+				post.value = response.data;
+				toaster.success(`${response.data.message}`);
+			} else {
+				toaster.error('error here');
+			}
+		} catch (error) {
+			console.log(error)
+		}
+	}
 
 	async function createPost(title,content) {
 		try {
@@ -24,22 +56,28 @@ export const usePostStore = defineStore('Post', () => {
           Authorization: `Bearer ${authStore.token}`,
 				}
 			});
-			toaster.success('success request api');
 
-			// à voir s'il faut effacer ou pas 
-			isAuthenticated.value = true;
-			user.value = response.data.user;
-			token.value = authStore.token.value;
-
+			if(response.status === 200) {
+				toaster.success(`${response.data.message}`);
+				console.log(`${response.data.message}`);
+			} else {
+				console.error('there is no data');
+			}
 		} catch (error) {
-			console.log('error', error);
-			toaster.error ('Erro request for post api');
+			console.error(`Error updating user data. Status: ${response.data.error}`);
+			toaster.error (`${response.data.error}`);
 		}
 	}
+
 	return {
 		isAuthenticated,
 		token,
 		user,
-		createPost,
+		posts,
+		post,
+		route,
+		getPosts,
+		getOnePost,
+		createPost
 	}
 })

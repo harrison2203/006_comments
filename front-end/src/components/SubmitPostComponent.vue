@@ -17,7 +17,7 @@ async function CreatePostComponent() {
 		postTitle.value = "";
 		postContent.value = "";
   } catch (error) {
-    toaster.error("failed");
+    toaster.error("The title and the content are mandatory");
   }
 }
 </script>

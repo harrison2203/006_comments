@@ -27,26 +27,23 @@ async function userData() {
 
 userData();
 
-
 </script>
 
 <template>
-<div v-if="patchValue && authUser.isAuthenticated">
-	<RouterLink :to="{ name: 'userAccount', params: { id: patchValue } }">
-		<a class="list_link">
-			<slot>
-				My account
-			</slot>
-		</a>
-	</RouterLink>
-</div>
-
-<div v-else>
-		<a class="list_link">
-			<slot>
-				<a>My account</a>
-			</slot>
-		</a>
-</div>
-
+	<div v-if="patchValue && authUser.isAuthenticated">
+		<RouterLink :to="{ name: 'userAccount', params: { id: patchValue } }">
+			<a class="list_link">
+				<slot>
+					My account
+				</slot>
+			</a>
+		</RouterLink>
+	</div>
+	<div v-else>
+			<a class="list_link">
+				<slot>
+					<a>My account</a>
+				</slot>
+			</a>
+	</div>
 </template>

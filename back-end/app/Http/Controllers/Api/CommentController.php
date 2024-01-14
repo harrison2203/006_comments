@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
 use App\Models\Post;
 
-
 class CommentController extends Controller
 {
 

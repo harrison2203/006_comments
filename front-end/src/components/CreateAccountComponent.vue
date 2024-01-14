@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { ref } from "vue";
 import { createToaster } from "@meforma/vue-toaster";
+import { RouterLink } from 'vue-router';
 
 const toaster = createToaster();
 const userName = ref("");
@@ -48,7 +49,9 @@ async function Register() {
 				<input v-model="userPassword" type="password" id="password" name="user_password">
 			</li>
 		</ul>
+		<Router-link to="/login">
 			<button @click="Register()" type="submit">Create Account</button>
+		</Router-link>
 	</form>
 </template>
 

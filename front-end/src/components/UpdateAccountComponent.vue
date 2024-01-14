@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from'vue';
-import { RouterLink } from 'vue-router';
 import { useAuthStore } from '@/stores/Auth';
 import { useUserStore } from '@/stores/User';
 

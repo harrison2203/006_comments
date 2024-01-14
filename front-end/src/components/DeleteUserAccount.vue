@@ -4,11 +4,9 @@ import { useUserStore } from '@/stores/User';
 import { useAuthStore } from '@/stores/Auth';
 import { RouterLink } from 'vue-router';
 
-
 const userStore = useUserStore();
 const authStore = useAuthStore();
 const isDeleting = ref(false);
-const emits = defineEmits(['eventHandler']);
 let el = ref();
 
 function deleteModal() {
@@ -40,6 +38,7 @@ async function deleteUserFunction() {
 		<template v-if="!userStore.user">
 			<p>acces denied</p>
 		</template>
+
 		<template v-else-if="userStore.user && !isDeleting">
 			<div>
 				<button id="myBtn" @click="deleteModal()" >Delete Account</button>
@@ -65,36 +64,34 @@ async function deleteUserFunction() {
 </template>
 
 <style scoped>
-      #container {
-        visibility: hidden;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        z-index: 1000;
-      }
-      #container div {
-        width: 50rem;
-        height: 20rem;
-        margin: 100px auto;
-        background-color: #f2f2f2;
-        border-radius: 10px;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        padding: 15px;
-        text-align: center;
-        font-weight: bold;
-        font-size: 15px;
-        border: 3px solid #cccccc;
-        position: absolute;
-        left: 50%;
-        top: 100px;
-        transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-        -webkit-transform: translate(-50%, -50%);
-			}
-
-
+#container {
+	visibility: hidden;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	z-index: 1000;
+}
+#container div {
+	width: 50rem;
+	height: 20rem;
+	margin: 100px auto;
+	background-color: #f2f2f2;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	padding: 15px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 15px;
+	border: 3px solid #cccccc;
+	position: absolute;
+	left: 50%;
+	top: 100px;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+}
 </style>

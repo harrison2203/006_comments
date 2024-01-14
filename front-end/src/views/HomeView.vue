@@ -1,6 +1,6 @@
 <script setup>
+import IndexPostsComponent from '../components/IndexPostsComponent.vue';
 import NavbarComponent from '../components/NavbarComponent.vue'
-import PostsComponent from '../components/PostsComponent.vue';
 </script>
 
 <template>
@@ -9,6 +9,6 @@ import PostsComponent from '../components/PostsComponent.vue';
 	</header>
 
 	<main>
-		<PostsComponent/>
+		<IndexPostsComponent/>
 	</main>
 </template>

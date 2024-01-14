@@ -37,7 +37,7 @@ const router = createRouter({
 			name: 'userAccount',
 			component: () => import('../views/UserAccountView.vue'),
 			props: true,
-		},
+		}
   ]
 })
 

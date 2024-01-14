@@ -8,7 +8,6 @@ export const useUserStore = defineStore('User', () => {
 
 	const toaster = createToaster();
 	const isAuthenticated = ref(false);
-
 	const user = ref(null);
 	const authStore = useAuthStore();
 	const  users = ref ([]);

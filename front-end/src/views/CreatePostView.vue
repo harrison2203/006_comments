@@ -1,9 +1,7 @@
 <script setup>
-import SubmitPost from '../components/SubmitPost.vue';
-
-
+import SubmitPostComponent from '../components/SubmitPostComponent.vue';
 </script>
 
 <template>
-<SubmitPost/>
+<SubmitPostComponent/>
 </template>

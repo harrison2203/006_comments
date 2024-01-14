@@ -56,7 +56,7 @@ class PostController extends Controller
 							return response()->json(['message' => 'Your post has been created', 'post' => $post], 200);
 					}
 			}
-	
+
 			return response()->json(['error' => 'Non authorized access'], 403);
 	}
 

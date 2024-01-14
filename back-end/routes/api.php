@@ -22,27 +22,16 @@ Route::post('login', [LoginController::class, 'authenticate']);
 //Route pour le logout
 Route::middleware('auth:sanctum')->post('logout', [LogoutController::class, 'logout']);
 
-
-
 Route::middleware('auth:sanctum')->group(function () {
 
-	//Route pour montrer un seul utilisateur
-	Route::get('/user/{userId}', [UserController::class, 'showOneUser']);
-	//Route pour editer un seul utilisateur
-	Route::put('/user/update/{userId}', [UserController::class, 'updateUser']);
-	//Route pour effacer un utilisateur
-	Route::delete('/user/delete/{userId}', [UserController::class, 'deleteUser']);
+	Route::get('/user/{userId}', [UserController::class, 'showOneUser']); // ok
+	Route::put('/user/update/{userId}', [UserController::class, 'updateUser']); // ok
+	Route::delete('/user/delete/{userId}', [UserController::class, 'deleteUser']); // ok
 
-
-	//Route pour créer un post d'un utilisateur
-	Route::post('/user/{userId}/post/', [PostController::class, 'createOnePost']);
-	//Route qui récupère tous les posts d'un utilisateur
+	Route::post('/user/{userId}/post/', [PostController::class, 'createOnePost']); // ok
 	Route::get('/user/posts/{user_Id}', [PostController::class, 'showPosts']);
-	//Route pour l'update d'un post d'un utilisateur
 	Route::put('/user/{userId}/edit/{postId}', [PostController::class, 'updatePost']);
-	//Route pour effacer le post d'un utilisateur
 	Route::delete('/user/{userId}/delete/{postId}', [PostController::class, 'deletePost']);
-
 
 	Route::get('/comments/', [CommentController::class, 'indexComments']);
 	Route::post('/createComment/{postId}', [CommentController::class, 'createComment']);
@@ -52,16 +41,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 // Route pour récupérer tous les posts
-Route::get('/posts', [PostController::class, 'indexPost']);
+Route::get('/posts', [PostController::class, 'indexPost']); // ok
 // Route pour récupérer un post par l'id
-Route::get('/post/{postId}', [PostController::class, 'showOnePost']);
+Route::get('/post/{postId}', [PostController::class, 'showOnePost']); // ok
 
 //Route pour récupérer tous les utilisateurs (non connectés)
 Route::get('/users', [UserController::class, 'indexUser']);
 
 
-
-//Route::post('test/{postId}', [PostController::class, 'updatePost']);
 Route::delete('/usersDelete', [AdminController::class, 'deleteUsers']);
 Route::delete('/postDelete', [AdminController::class, 'deletePosts']);
 Route::delete('/commentsDelete', [AdminController::class, 'deleteComments']);
