@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class PostController extends Controller
 {
@@ -15,8 +16,12 @@ class PostController extends Controller
 	 */
 	public function indexPost()
 	{
-
 		$posts = Post::orderBy('created_at', 'desc')->with('user')->get();
+
+		$posts->map(function ($post) {
+			$post->formatted_created_at = Carbon::parse($post->created_at)->format('d/m/Y');
+			return $post;
+		});
 
 		if(count($posts) > 0){
 			return response()->json(['message' => 'the posts published are', 'posts' => $posts], 200);
@@ -30,34 +35,34 @@ class PostController extends Controller
 	 */
 	public function createOnePost(Request $request, $userId)
 	{
-			$existingUser = User::find($userId);
-	
-			if (!$existingUser) {
-					return response()->json(['error' => 'User not found'], 404);
-			}
-	
-			$postValidation = $request->validate([
-					'title' => ['required', 'string'],
-					'content' => ['required', 'string'],
-			]);
+		$existingUser = User::find($userId);
 
-			if (Auth::check()) {
-					$loggedInUserId = Auth::id();
+		if (!$existingUser) {
+				return response()->json(['error' => 'User not found'], 404);
+		}
 
-					if ($loggedInUserId == $userId) {
-							$post = new Post([
-									'title' => $postValidation['title'],
-									'content' => $postValidation['content'],
-							]);
-	
-							$post->user()->associate($loggedInUserId);
-							$post->save();
-	
-							return response()->json(['message' => 'Your post has been created', 'post' => $post], 200);
-					}
-			}
+		$postValidation = $request->validate([
+				'title' => ['required', 'string'],
+				'content' => ['required', 'string'],
+		]);
 
-			return response()->json(['error' => 'Non authorized access'], 403);
+		if (Auth::check()) {
+				$loggedInUserId = Auth::id();
+
+				if ($loggedInUserId == $userId) {
+						$post = new Post([
+								'title' => $postValidation['title'],
+								'content' => $postValidation['content'],
+						]);
+
+						$post->user()->associate($loggedInUserId);
+						$post->save();
+
+						return response()->json(['message' => 'Your post has been created', 'post' => $post], 200);
+				}
+		}
+
+		return response()->json(['error' => 'Non authorized access'], 403);
 	}
 
 	/**

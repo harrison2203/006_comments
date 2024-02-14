@@ -1,7 +1,5 @@
 <script setup>
 import { useAuthStore } from '@/stores/Auth';
-import { RouterLink } from 'vue-router';
-import { ref } from 'vue'
 import { createToaster } from "@meforma/vue-toaster";
 
 const toaster = createToaster();
@@ -16,7 +14,6 @@ async function logoutUser() {
     console.error(error);
   }
 }
-
 </script>
 
 <template>
@@ -25,6 +22,4 @@ async function logoutUser() {
 			Logout
 		</slot>
 	</button>
-
-
 </template>

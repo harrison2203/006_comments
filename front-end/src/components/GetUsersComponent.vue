@@ -1,9 +1,8 @@
 <script setup>
-import {ref, defineEmits} from'vue';
+import { ref } from'vue';
 import { createToaster } from "@meforma/vue-toaster";
 import { RouterLink } from 'vue-router';
 import { useUserStore } from '@/stores/User';
-
 
 // a regarder si je l'efface ou pas
 // Composant qui récupère tous les utilisateurs non authentifié.

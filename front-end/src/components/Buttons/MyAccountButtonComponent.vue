@@ -47,3 +47,10 @@ userData();
 			</a>
 	</div>
 </template>
+
+<style scoped>
+	.list__link{
+		display: none;
+		margin-right: 1rem;
+	}
+</style>

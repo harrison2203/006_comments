@@ -1,7 +1,13 @@
 <script setup>
-import SubmitPostComponent from '../components/SubmitPostComponent.vue';
+import CreatePostComponent from '../components/CreatePostComponent.vue';
+import NavbarComponent from '../components/NavbarComponent.vue'
 </script>
 
 <template>
-<SubmitPostComponent/>
+  <header>
+    <NavbarComponent/>
+	</header>
+
+
+	<CreatePostComponent/>
 </template>

@@ -1,12 +1,11 @@
 <script setup>
-import { ref, defineEmits } from'vue';
+import { ref } from'vue';
 import { useUserStore } from '@/stores/User';
 import { useAuthStore } from '@/stores/Auth';
 import { RouterLink } from 'vue-router';
 
 const userStore = useUserStore();
 const authStore = useAuthStore();
-const isDeleting = ref(false);
 let el = ref();
 
 function deleteModal() {
@@ -14,11 +13,11 @@ function deleteModal() {
   el.style.visibility = el.style.visibility == "visible" ? "hidden" : "visible";
 }
 
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+//window.onclick = function(event) {
+// if (event.target == modal) {
+//   modal.style.display = "none";
+// }
+//}
 
 async function deleteUserFunction() {
 	try{
@@ -30,18 +29,13 @@ async function deleteUserFunction() {
 		console.error(error)
 	}
 }
-
 </script>
 
 <template>
 	<main>
-		<template v-if="!userStore.user">
-			<p>acces denied</p>
-		</template>
-
-		<template v-else-if="userStore.user && !isDeleting">
-			<div>
-				<button id="myBtn" @click="deleteModal()" >Delete Account</button>
+		<template class="" v-if="userStore.user">
+			<div class="">
+				<button class="myBtn" @click="deleteModal()" >Delete Account</button>
 			</div>
 				<div  class="modal" id="container">
 					<div>
@@ -57,13 +51,21 @@ async function deleteUserFunction() {
 				</div>
 		</template>
 
-			<template v-else>
-      <p>Loading user data...</p>
-    </template>
 	</main>
 </template>
 
 <style scoped>
+
+.myBtn{
+	width: 20rem;
+	height: 5rem;
+	border-radius: 1.2rem;
+	margin-top: 2rem;
+	background-color: var(--color-black);
+	color: var(--color-background);
+	font-weight: bold;
+	border: none;
+}
 #container {
 	visibility: hidden;
 	position: absolute;
@@ -75,8 +77,8 @@ async function deleteUserFunction() {
 	z-index: 1000;
 }
 #container div {
-	width: 50rem;
-	height: 20rem;
+	width: 70rem;
+	height: 30rem;
 	margin: 100px auto;
 	background-color: #f2f2f2;
 	border-radius: 10px;

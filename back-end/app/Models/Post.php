@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Post extends Model
 {
-    use HasFactory;
+		use HasFactory;
 
 		protected $fillable = [
 			'title',

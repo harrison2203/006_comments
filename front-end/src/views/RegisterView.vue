@@ -1,6 +1,6 @@
 <script setup>
 import NavbarComponent from '../components/NavbarComponent.vue'
-import CreateAccountComponent from '../components/CreateAccountComponent.vue';
+import SignInComponent from '../components/SignInComponent.vue';
 
 </script>
 
@@ -11,6 +11,13 @@ import CreateAccountComponent from '../components/CreateAccountComponent.vue';
 	</header>
 	
 	<main>
-		<CreateAccountComponent/>
+		<div class="test">
+			<SignInComponent/>
+		</div>
 	</main>
 </template>
+
+<style scoped>
+
+
+</style>

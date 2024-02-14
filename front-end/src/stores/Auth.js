@@ -32,6 +32,7 @@ export const useAuthStore = defineStore('Auth', () => {
 				console.log('la mega response', accessToken);
 			}else{
 				toaster.error('token is undefined')
+				isAuthenticated.value = false;
 			}
 			setAuthData(response.data);
 		} catch (error) {

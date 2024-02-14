@@ -28,3 +28,8 @@ async function submitComment(){
 		</RouterLink>
 	</form>
 </template>
+
+<style scoped>
+
+
+</style>

@@ -28,7 +28,6 @@ export const useUserStore = defineStore('User', () => {
 			} else {
 				console.log('all users information here', users.value)
 			}
-
 		} catch (error) {
 			console.log('error', error);
 			toaster.error('not data found');
@@ -59,7 +58,7 @@ export const useUserStore = defineStore('User', () => {
 		}
 	}
 	
-	async function updateUser(newNameInfo, newEmailInfo){
+	async function updateUser(newNameInfo, newEmailInfo) {
 		try {
 			const userId = authStore.user.id;
 			const response = await axios.put(`http://localhost:8000/api/user/update/${userId}`,

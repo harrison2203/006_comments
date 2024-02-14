@@ -13,6 +13,8 @@ export const usePostStore = defineStore('Post', () => {
 	const authStore = useAuthStore();
 	const posts = ref([]);
 	const post = ref([]);
+	const searchTerm = ref("");
+	const resultSearchBar = ref([]);
 	let route = useRoute();
 
 	async function getPosts() {
@@ -36,6 +38,7 @@ export const usePostStore = defineStore('Post', () => {
 
 			if(response.status === 200){
 				post.value = response.data;
+				console.log('la value de mon post', post.value)
 				toaster.success(`${response.data.message}`);
 			} else {
 				toaster.error('error here');
@@ -66,6 +69,21 @@ export const usePostStore = defineStore('Post', () => {
 		} catch (error) {
 			console.error(`Error updating user data. Status: ${response.data.error}`);
 			toaster.error (`${response.data.error}`);
+		}
+	}
+
+	async function searchBar () {
+		if(searchTerm.value.trim() === ''){
+
+		} else {
+			try {
+				const response = await axios.get(`http://localhost:8000/api/search/${searchTerm.value}`);
+				resultSearchBar.value = response.data;
+				console.log('résultat de la recherche', resultSearchBar.value);
+
+			} catch (error) {
+					console.log('une erreur dans la recherche', error);
+			}
 		}
 	}
 

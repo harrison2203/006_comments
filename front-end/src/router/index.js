@@ -33,11 +33,17 @@ const router = createRouter({
 			component: () => import('../views/CreatePostView.vue')
 		},
 		{
+			path: '/update/:id',
+			name: 'update',
+			component: () => import('../views/UpdateUserAccountView.vue'),
+			props: true,
+		},
+		{
 			path: '/my_Account/:id',
 			name: 'userAccount',
-			component: () => import('../views/UserAccountView.vue'),
+			component: () => import('../views/IndexUserAccountView.vue'),
 			props: true,
-		}
+		},
   ]
 })
 
