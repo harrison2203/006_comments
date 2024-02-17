@@ -10,13 +10,13 @@ const searchTerm = ref("");
 // this function gets the result from the search bar / navbar.
 const onSearchResultUpdated = (searchResultsData) => {
   searchResults.value = searchResultsData;
-	console.log('eh ben', searchResultsData.value)
+	console.log('eh ben', searchResults)
 }
 
 // this function get the value from the searchBar
 const userSearchBarValue = (userValueData) => {
 	searchTerm.value = userValueData;
-	console.log('eh benddfdsfsdf', searchTerm.value)
+	console.log('la value de search term home view', searchTerm)
 }
 </script>
 

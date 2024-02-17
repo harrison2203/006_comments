@@ -72,15 +72,16 @@ export const usePostStore = defineStore('Post', () => {
 		}
 	}
 
-	async function searchBar () {
-		if(searchTerm.value.trim() === ''){
-
+	async function searchBar (searchTerm) {
+		console.log('search term value', searchTerm)
+		if(searchTerm.value === ''){
+			
 		} else {
 			try {
-				const response = await axios.get(`http://localhost:8000/api/search/${searchTerm.value}`);
+				const response = await axios.get(`http://localhost:8000/api/search/${searchTerm}`);
+				console.log('la response de la data', response.data)
 				resultSearchBar.value = response.data;
 				console.log('résultat de la recherche', resultSearchBar.value);
-
 			} catch (error) {
 					console.log('une erreur dans la recherche', error);
 			}
@@ -94,8 +95,10 @@ export const usePostStore = defineStore('Post', () => {
 		posts,
 		post,
 		route,
+		searchTerm,
+		resultSearchBar,
 		getPosts,
 		getOnePost,
-		createPost
+		createPost,
 	}
 })

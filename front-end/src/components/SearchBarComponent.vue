@@ -1,14 +1,37 @@
 <script setup>
 import axios from 'axios';
 import { watchEffect, ref, defineEmits } from 'vue'
+import { usePostStore } from '@/stores/Post';
 
+const postStore = usePostStore();
+console.log('on console log', postStore)
 const emits = defineEmits(['search-result-updated', 'user-input-value']);
 const searchTerm = ref("");
 const titles = ref([]);
 
+
+//async function callSearchBar () {
+//	try {
+//		if (searchTerm.value === ''){
+//			console.log('vide')
+//		} else {
+//			await postStore.searchBar(searchTerm.value);
+//			emits('user-input-value', searchTerm.value);
+//			console.log('remplie')
+//		}
+//
+//	} catch (error) {
+//		console.log('errorrrrr', error);
+//	}
+//}
+
+//callSearchBar();
+
+
 watchEffect(() => {
   searchBar();
 });
+
 
 async function searchBar(){
 
@@ -29,20 +52,17 @@ async function searchBar(){
 	}
 }
 
-//searchBar();
+searchBar();
+
+
 
 </script>
 
 <template>
 	<form @submit.prevent>
 		<div class="navbar_input">
-			<input v-model="searchTerm" class="input_single" type="text" placeholder="Search..." @keyup="searchBar()" @input="$emit('search-result-updated', searchTerm)">
-			<div v-if="titles.length > 0">
-				<ul>
-					<li v-for="post in titles" :key="post.id">
-					</li>
-				</ul>
-    	</div>
+			<input v-model="searchTerm" class="input_single" type="text" placeholder="Search..." @keyup="searchBar" @input="$emit('search-result-updated', searchTerm)">
+
 		</div>
 </form>
 </template>

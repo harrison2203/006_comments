@@ -8,11 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Carbon;
 
 class UserController extends Controller
 {
-
 	public function indexUser()
 	{
 		$users = User::all();
@@ -22,37 +21,36 @@ class UserController extends Controller
 		}else{
 			return response()->json(['error' => 'Any user here'], 404);
 		}
-		}
-
+	}
 	/**
 	 * Create a new user
 	 */
 	public function createUser(Request $request)
 	{
-			$request->validate([
-					'name' => 'required',
-					'email' => 'required|email|unique:users,email',
-					'password' => 'required|min:8',
-			]);
+		$request->validate([
+				'name' => 'required',
+				'email' => 'required|email|unique:users,email',
+				'password' => 'required|min:8',
+		]);
 
-			$user = User::create([
-					'name' => $request->input('name'),
-					'email' => $request->input('email'),
-					'password' => Hash::make($request->input('password')),
-			]);
+		$user = User::create([
+				'name' => $request->input('name'),
+				'email' => $request->input('email'),
+				'password' => Hash::make($request->input('password')),
+		]);
 
 			return response()->json(['message' => 'User created succesfully', 'user' => $user], 201);
 	}
-
 	/**
 	 * Display one user by id (connected user)
 	 */
 	public function showOneUser($userId)
 	{
-
 		if(Auth::check()){
 			$user = Auth::id();
 			$userInformation = User::find($userId);
+			$formattedDate = $userInformation->created_at->format('d-m-Y');
+			$userInformation->formatted_date = $formattedDate;
 
 			if($user != $userInformation->id){
 				return response()->json(['error'=>'Non authorized acces'], 403);

@@ -44,7 +44,7 @@ indexUserInformation();
 				</div>
 				<div class="user-info__creation-date">
 					<span class="user-info__span">Account creation date : </span>
-					<span class="user-info__span-information">{{ user.created_at }}</span>
+					<span class="user-info__span-information">{{ user.formatted_date }}</span>
 				</div>
 			</div>
 			<div class="user-info__buttons">
@@ -54,7 +54,6 @@ indexUserInformation();
 				<DeleteUserAccount/>
 			</div>
 		</template>
-
 		<template v-else>
 			Loading...
 		</template>
@@ -63,29 +62,29 @@ indexUserInformation();
 
 <style scoped>
 
-.user-info__title{
+.user-info__title {
 	text-align: center;
 	font-weight: bold;
 	font-size: 4rem;
 }
 
-.user-info__information{
+.user-info__information {
 	margin-top: 5rem;
 	margin-left: 8rem;
 }
 
-.user-info__span{
+.user-info__span {
 	font-weight: bold;
 	font-size: 2.5rem;
 }
 
-.user-info__buttons{
+.user-info__buttons {
 	margin-top: 5rem;
 	display: flex;
 	justify-content: space-around;
 }
 
-.user-info__editing-button{
+.user-info__editing-button {
 	width: 20rem;
 	height: 5rem;
 	border-radius: 1.2rem;
@@ -100,7 +99,7 @@ indexUserInformation();
 	margin-bottom: 1rem;
 }
 
-.user-info__span-information{
+.user-info__span-information {
 	font-size: 2rem;
 }
 </style>

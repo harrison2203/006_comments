@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
@@ -95,16 +96,19 @@ class PostController extends Controller
 	 */
 	public function showOnePost($postId)
 	{
-		$onePost = Post::findOrFail($postId);
-		//$posts = Post::orderBy('created_at', 'desc')->with('user')->get();
+			$onePost = Post::findOrFail($postId);
+			//$posts = Post::orderBy('created_at', 'desc')->with('user')->get();
 
-		if($onePost){
-			return response()->json(['message' => 'Your post :', 'post' => $onePost], 200);
-		}else{
-			return response()->json(['error' => 'Post not found'], 404);
-	};
-}
+			if($onePost){
+					// Formater la date avec Carbon
+					$formattedDate = $onePost->created_at->format('Y-m-d');
+					$onePost->formatted_date = $formattedDate;
 
+					return response()->json(['message' => 'Your post :', 'post' => $onePost], 200);
+			} else {
+					return response()->json(['error' => 'Post not found'], 404);
+			}
+	}
 	/**
 	 * Update Post (user connected)
 	 */
@@ -132,7 +136,6 @@ class PostController extends Controller
 			return response()->json(['message' => 'you are not connected'], 401);
 		}
 	}
-
 	/**
 	 * Delete Post (user connected)
 	 */

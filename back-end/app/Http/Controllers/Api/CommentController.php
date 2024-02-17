@@ -7,10 +7,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
 use App\Models\Post;
+use Illuminate\Support\Carbon;
 
 class CommentController extends Controller
 {
-
 	public function indexComments()
 	{
 		$comments = Comment::all();
@@ -50,21 +50,24 @@ class CommentController extends Controller
 				return response()->json(['message' => 'You are not connected'], 401);
 		}
 	}
-
 	/**
 	 * Get all the comments from one post.
 	 */
 	public function getComments($postId)
 	{
 		if($postId){
-			$post = Post::findOrFail($postId);
-			$postComments = $post->comments;
-			return response()->json(['message' => 'Here are the comments', 'comments' => $postComments], 200);
+			$comments = Post::findOrFail($postId)->comments()->with('user')->get();
+
+			$comments->map(function ($comment) {
+				$comment->formatted_created_at = Carbon::parse($comment->created_at)->format('d/m/Y');
+				return $comment;
+			});
+
+			return response()->json(['message' => 'Here are the comments', 'comments' => $comments], 200);
 		}else{
 			return response()->json(['message' => 'a problem has occured'], 404);
 		}
 	}
-
 	/**
 	 * Only the comment owner can delete his comment
 	 */
@@ -74,7 +77,7 @@ class CommentController extends Controller
 			$userComment = Comment::where('id', $commentId)
 											->where('user_id', $userId)
 											->first();
-											
+
 			if($userComment){
 				Comment::destroy($commentId);
 				return response()->json(['message' => 'comment deleted']);

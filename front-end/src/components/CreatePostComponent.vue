@@ -12,8 +12,7 @@ const toaster = createToaster();
 async function CreatePostComponent() {
   try {
     await postCreator.createPost(postTitle.value, postContent.value);
-    toaster.success("Créé youpii");
-
+    toaster.success("Créé youpii");63
 		postTitle.value = "";
 		postContent.value = "";
   } catch (error) {

@@ -9,15 +9,20 @@ const authStore = useAuthStore();
 let el = ref();
 
 function deleteModal() {
-  el = document.getElementById("container");
-  el.style.visibility = el.style.visibility == "visible" ? "hidden" : "visible";
+	el = document.getElementById("container");
+	//el.style.visibility = el.style.visibility == "visible" ? "hidden" : "visible";
+	if (el.style.visibility === "visible") {
+		el.style.visibility = "hidden";
+	} else {
+		el.style.visibility = "visible";
+	}
 }
 
-//window.onclick = function(event) {
-// if (event.target == modal) {
-//   modal.style.display = "none";
-// }
-//}
+window.onclick = function(event) {
+ if (event.target == modal) {
+   modal.style.display = "visible";
+ }
+}
 
 async function deleteUserFunction() {
 	try{
@@ -37,25 +42,23 @@ async function deleteUserFunction() {
 			<div class="">
 				<button class="myBtn" @click="deleteModal()" >Delete Account</button>
 			</div>
-				<div  class="modal" id="container">
-					<div>
-						<h1>Delete Account</h1>
-      			<p>Are you sure you want to delete your account?</p>
-						<RouterLink to="/">
-							<button @click="deleteUserFunction">Confirm Delete</button>
-						</RouterLink>
-						<RouterLink to="/">
-							<button>Cancel</button>
-						</RouterLink>
-					</div>
+			<div  class="modal" id="container">
+				<div class="modal-content">
+					<h1>Delete Account</h1>
+					<p>Are you sure you want to delete your account?</p>
+					<RouterLink to="/">
+						<button @click="deleteUserFunction">Confirm Delete</button>
+					</RouterLink>
+					<RouterLink to="/">
+						<button>Cancel</button>
+					</RouterLink>
 				</div>
+			</div>
 		</template>
-
 	</main>
 </template>
 
 <style scoped>
-
 .myBtn{
 	width: 20rem;
 	height: 5rem;
@@ -66,17 +69,8 @@ async function deleteUserFunction() {
 	font-weight: bold;
 	border: none;
 }
-#container {
-	visibility: hidden;
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	text-align: center;
-	z-index: 1000;
-}
-#container div {
+
+.modal {
 	width: 70rem;
 	height: 30rem;
 	margin: 100px auto;
@@ -91,9 +85,15 @@ async function deleteUserFunction() {
 	border: 3px solid #cccccc;
 	position: absolute;
 	left: 50%;
-	top: 100px;
+	top: 25rem;
 	transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
 	-webkit-transform: translate(-50%, -50%);
+	visibility: hidden;
+	position: absolute;
+	text-align: center;
+	z-index: 1000;
+	background-color: var(--color-hover);
 }
+
 </style>

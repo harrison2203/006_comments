@@ -15,11 +15,7 @@ async function indexPosts() {
 	if (props.inputValueProp === '') {
 	await postStore.getPosts();
 	isDataLoaded.value = true;
-
-	} else {
-
 	}
-
 }
 
 indexPosts();
@@ -31,7 +27,6 @@ indexPosts();
 <div v-if="isDataLoaded">
 	<div v-if="inputValueProp !==''">
 		<section  v-for="post in searchResultsProp" :key="post.id" class="container__post">
-			<RouterLink class="post__router" :to="{name: 'post', params: {id: post.id}}">
 			<div class ="post-description__container">
 				<div class="post__name-hour">
 					<h1 class="post-author__name">{{ post.user_name }}</h1>
@@ -41,11 +36,8 @@ indexPosts();
 			</div>
 			<h2 class="post__title">{{ post.title }}</h2>
 			<p class="post__content">{{ post.content }}</p>
-
-		</RouterLink>
 		</section>
 	</div>
-
 	<div v-else-if="inputValueProp === ''">
 		<section v-for="element in postStore.posts" :key="element.id" class="container__post">
 				<RouterLink class="post__router" :to="{name: 'post', params: {id: element.id}}">
@@ -66,7 +58,6 @@ indexPosts();
 	</div>
 </div>
 </main>
-
 
 <!--
 	<main class="main__container">
