@@ -85,22 +85,24 @@ export const useUserStore = defineStore('User', () => {
 
 	async function deleteUser() {
 		try{
+			console.log('LE LOGGGGGGGGGGGGGGGGGGG')
 			const userId = authStore.user.id;
+			console.log('authStore', authStore.token)
+			console.log('USER ID', userId);
 			const response = await axios.delete(`http://localhost:8000/api/user/delete/${userId}`,
 			{
 				headers: {
 					Authorization: `Bearer ${authStore.token}`,
-				}
+				},
 			})
-			console.log(response.data)
-			console.log('testtttttttt', response)
+			console.log('Réponse du serveur:', response);
 			if(userId === response.data.user.id){
 				console.log(`${response.data.messsage}`)
 			} else {
 				console.error(`${response.data.messsage}`)
 			}
 		} catch (error) {
-			console.error
+			console.error (error)
 		}
 	}
 

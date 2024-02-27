@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Carbon;
 
 class UserController extends Controller
 {
@@ -94,6 +95,9 @@ class UserController extends Controller
 			if($user != $userInformation->id){
 				return response()->json(['message' => 'Non authorized acces'], 404);
 			}else{
+
+				Post::where('user_id', $userId)->delete();
+				Comment::where('user_id', $userId)->delete();
 				$userInformation-> delete();
 				return response()->json(['message' => 'User deleted succesfully'], 201);
 			}

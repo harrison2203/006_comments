@@ -5,6 +5,7 @@ import { defineStore } from 'pinia';
 import { useRoute } from 'vue-router';
 import { useAuthStore } from '@/stores/Auth';
 
+
 export const usePostStore = defineStore('Post', () => {
 	const toaster = createToaster();
 	const isAuthenticated = ref(null);
@@ -34,17 +35,59 @@ export const usePostStore = defineStore('Post', () => {
 
 	async function getOnePost() {
 		try {
+			console.log('le params', route.params.id)
 			const response = await axios.get('http://localhost:8000/api/post/' + route.params.id)
 
 			if(response.status === 200){
 				post.value = response.data;
 				console.log('la value de mon post', post.value)
 				toaster.success(`${response.data.message}`);
-			} else {
+			} else {222
 				toaster.error('error here');
 			}
 		} catch (error) {
 			console.log(error)
+		}
+	}
+
+	async function deletePost(postId) {
+		try {
+			const userId = authStore.user.id;
+			console.log('VARIABLE POST ID',postId)
+			const response = await axios.delete(`http://localhost:8000/api/user/${userId}/delete/${postId}`,
+			{
+				headers: {
+          Authorization: `Bearer ${authStore.token}`,
+				}
+			});
+
+			console.log('log deleted post', response)
+
+			if(response.status === 201) {
+				toaster.success(`${response.data.message}`);
+			} else {
+				console.error(`delete error: ${response.data.error}`);
+			}
+		} catch (error) {
+				console.log(error);
+		}
+	}
+
+	async function editPost (newTitleInfo, newContentInfo, postId) {
+		const userId = authStore.user.id;
+		try {
+			const response = await axios.put(`http://localhost:8000/api/user/${userId}/edit/${postId}`,
+			{
+				title: newTitleInfo,
+				content: newContentInfo,
+			},
+			{
+				headers: {
+          Authorization: `Bearer ${authStore.token}`,
+				}
+			});
+		} catch (error) {
+			toaster.error(error)
 		}
 	}
 
@@ -100,5 +143,7 @@ export const usePostStore = defineStore('Post', () => {
 		getPosts,
 		getOnePost,
 		createPost,
+		deletePost,
+		editPost,
 	}
 })

@@ -1,10 +1,11 @@
 <script setup>
-import DeleteUserAccount from '../components/DeleteUserAccount.vue';
-import { ref, watchEffect, computed } from'vue';
+import { ref } from'vue';
 import { useUserStore } from '@/stores/User';
 import { RouterLink } from 'vue-router';
-import { format } from 'date-fns';
+import DeleteUserComponent from '../components/DeleteUserComponent.vue';
+import { createToaster } from "@meforma/vue-toaster";
 
+const toaster = createToaster();
 const userStore = useUserStore();
 console.log('ce par ici', userStore)
 const user = ref([]);
@@ -12,17 +13,14 @@ const user = ref([]);
 async function indexUserInformation() {
 	try {
 		await userStore.getUserById()
-		user.value = userStore.user
-		console.log('coucou', user)
-		
-		console.log("suceeessssss")
-
+		user.value = userStore.user;
 	} catch (error) {
-		console.log(error);
+		toaster.error(error);
 	}
 }
 
 indexUserInformation();
+
 </script>
 
 <template>
@@ -35,6 +33,10 @@ indexUserInformation();
 						<span class="user-info__span-information">{{ user.id }}</span>
 				</div>
 				<div class="user-info__name">
+					<div class="user-info__creation-date">
+						<span class="user-info__span">Account creation date : </span>
+						<span class="user-info__span-information">{{ user.formatted_date }}</span>
+					</div>
 					<span class="user-info__span">Name : </span>
 						<span class="user-info__span-information">{{ user.name }}</span>
 				</div>
@@ -42,16 +44,12 @@ indexUserInformation();
 					<span class="user-info__span">Email : </span>
 					<span class="user-info__span-information">{{ user.email }}</span>
 				</div>
-				<div class="user-info__creation-date">
-					<span class="user-info__span">Account creation date : </span>
-					<span class="user-info__span-information">{{ user.formatted_date }}</span>
-				</div>
 			</div>
 			<div class="user-info__buttons">
 				<RouterLink :to="{ name: 'update', params: { id: user.id } }">
 					<button class="user-info__editing-button">Modifier</button>
 				</RouterLink>
-				<DeleteUserAccount/>
+				<DeleteUserComponent/>
 			</div>
 		</template>
 		<template v-else>
@@ -61,29 +59,24 @@ indexUserInformation();
 </template>
 
 <style scoped>
-
 .user-info__title {
 	text-align: center;
 	font-weight: bold;
 	font-size: 4rem;
 }
-
 .user-info__information {
 	margin-top: 5rem;
 	margin-left: 8rem;
 }
-
 .user-info__span {
 	font-weight: bold;
 	font-size: 2.5rem;
 }
-
 .user-info__buttons {
 	margin-top: 5rem;
 	display: flex;
 	justify-content: space-around;
 }
-
 .user-info__editing-button {
 	width: 20rem;
 	height: 5rem;
@@ -95,10 +88,13 @@ indexUserInformation();
 	border: none;
 }
 
+.user-info__editing-button:hover {
+	background-color: var(--color-button-dropdown-red);
+	opacity: 2;
+}
 .user-info__id, .user-info__name, .user-info__email {
 	margin-bottom: 1rem;
 }
-
 .user-info__span-information {
 	font-size: 2rem;
 }

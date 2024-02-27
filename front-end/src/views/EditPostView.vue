@@ -1,7 +1,8 @@
 <script setup>
-import { ref } from'vue';
-import EditUserComponent from '../components/EditUserComponent.vue';
 import NavbarComponent from '../components/NavbarComponent.vue'
+import SinglePostComponent from '../components/SinglePostComponent.vue';
+import EditPostComponent from '../components/EditPostComponent.vue';
+
 import AsideComponent from '../components/AsideComponent.vue';
 </script>
 
@@ -9,28 +10,24 @@ import AsideComponent from '../components/AsideComponent.vue';
   <header>
     <NavbarComponent/>
 	</header>
-	<div class="general__container">
+
+	<div class="post__container">
 		<aside class="aside">
 			<AsideComponent/>
 		</aside>
 
 		<main class="main">
-			<div class="main__user-page">
-				<EditUserComponent/>
+			<div>
+				<EditPostComponent/>
 			</div>
 		</main>
 	</div>
 </template>
 
 <style scoped>
-.general__container{
+.post__container{
 	display: grid;
 	grid-template-areas: "aside main";
-	grid-template-columns: 15% 60%;
-}
-
-.main{
-	margin-top: 4rem;
-	padding-left: 7.5rem;
+	grid-template-columns: 15% 85%;
 }
 </style>

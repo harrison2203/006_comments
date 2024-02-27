@@ -9,7 +9,6 @@ const emits = defineEmits(['search-result-updated', 'user-input-value']);
 const searchTerm = ref("");
 const titles = ref([]);
 
-
 //async function callSearchBar () {
 //	try {
 //		if (searchTerm.value === ''){
@@ -27,14 +26,11 @@ const titles = ref([]);
 
 //callSearchBar();
 
-
 watchEffect(() => {
   searchBar();
 });
 
-
 async function searchBar(){
-
 	if(searchTerm.value.trim() === ''){
 
 	} else {
@@ -42,10 +38,8 @@ async function searchBar(){
 			const response = await axios.get(`http://localhost:8000/api/search/${searchTerm.value}`);
 			titles.value = response.data;
 			console.log('la donnee', titles.value)
-
 				emits('user-input-value', searchTerm.value);
 				emits('search-result-updated', titles.value);
-			
 		} catch (error) {
 			console.log(error)
 		}
@@ -53,16 +47,12 @@ async function searchBar(){
 }
 
 searchBar();
-
-
-
 </script>
 
 <template>
 	<form @submit.prevent>
 		<div class="navbar_input">
 			<input v-model="searchTerm" class="input_single" type="text" placeholder="Search..." @keyup="searchBar" @input="$emit('search-result-updated', searchTerm)">
-
 		</div>
 </form>
 </template>

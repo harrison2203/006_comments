@@ -56,7 +56,7 @@ class CommentController extends Controller
 	public function getComments($postId)
 	{
 		if($postId){
-			$comments = Post::findOrFail($postId)->comments()->with('user')->get();
+			$comments = Post::findOrFail($postId)->comments()->orderBy('created_at', 'desc')->with('user')->get();
 
 			$comments->map(function ($comment) {
 				$comment->formatted_created_at = Carbon::parse($comment->created_at)->format('d/m/Y');

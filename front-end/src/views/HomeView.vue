@@ -7,13 +7,13 @@ import NavbarComponent from '../components/NavbarComponent.vue'
 const searchResults = ref([]);
 const searchTerm = ref("");
 
-// this function gets the result from the search bar / navbar.
+// this function gets the posts from the search bar / navbar.
 const onSearchResultUpdated = (searchResultsData) => {
   searchResults.value = searchResultsData;
 	console.log('eh ben', searchResults)
 }
 
-// this function get the value from the searchBar
+// this function get the value from the searchBar(mot écrit dans la barre de recherche)
 const userSearchBarValue = (userValueData) => {
 	searchTerm.value = userValueData;
 	console.log('la value de search term home view', searchTerm)

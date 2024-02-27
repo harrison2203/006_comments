@@ -4,13 +4,11 @@ import { usePostStore } from '@/stores/Post';
 const postStore = usePostStore();
 console.log('me voila', postStore);
 
-
 async function getPostById() {
 		return await postStore.getOnePost();
 }
 
 getPostById();
-
 </script>
 
 <template>
@@ -29,7 +27,6 @@ getPostById();
 </template>
 
 <style scoped>
-
 .container {
 	margin-top: 4rem;
 	border-left: 1px solid var(--color-hover-two);

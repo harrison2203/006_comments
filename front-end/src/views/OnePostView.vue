@@ -23,7 +23,6 @@ import AsideComponent from '../components/AsideComponent.vue';
 			<GetCommentsComponent/>
 		</main>
 	</div>
-
 </template>
 
 <style scoped>
@@ -31,6 +30,5 @@ import AsideComponent from '../components/AsideComponent.vue';
 	display: grid;
 	grid-template-areas: "aside main";
 	grid-template-columns: 15% 85%;
-
 	}
 </style>

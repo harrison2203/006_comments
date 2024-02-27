@@ -1,7 +1,6 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import MyAccountButtonComponent from './Buttons/MyAccountButtonComponent.vue';
-
 </script>
 
 <template>
@@ -32,29 +31,30 @@ import MyAccountButtonComponent from './Buttons/MyAccountButtonComponent.vue';
 </template>
 
 <style scoped>
-.layout{
+.layout {
 	margin-left: 6rem;
 	margin-top: 4rem;
 	display: flex;
 	justify-content: left;
 }
-
-.layout__aside{
+.layout__aside {
 	margin-top: 2rem;
 	margin-bottom: 1rem;
 }
-
-.aside__list{
+.aside__list {
 	
 }
-.list__item{
+.list__item {
 	margin-bottom: 1.8rem;
 	display: flex;
 }
 
-.item__title{
+.list-item:hover {
+	background-color: var(--color-button-dropdown-red);
+	opacity: 2;
+}
+.item__title {
 	margin-left: 1rem;
 	color: var(--color-black);
 }
-
 </style>

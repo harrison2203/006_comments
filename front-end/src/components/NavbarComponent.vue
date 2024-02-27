@@ -32,6 +32,7 @@ watchEffect(() => {
 
   //const userName = noUser.value?.name || '';
 	const userName = noUser.value && noUser.value.name ? noUser.value.name : '';
+	console.log('USER NAME', userName)
 	const getFullName = userName.split(' ');
 	let firstName;
 	for (let i = 0; i < getFullName.length; i ++){
@@ -97,7 +98,7 @@ watchEffect(() => {
 </template>
 
 <style scoped>
-.navbar{
+.navbar {
 	height: auto;
 	display: grid;
 	grid-template-areas: "image input button content";
@@ -106,7 +107,7 @@ watchEffect(() => {
 	margin-bottom: 10px
 	}
 
-.navbar_image{
+.navbar_image {
 	grid-area: image;
 	position: relative;
 	width: 3rem;
@@ -115,41 +116,25 @@ watchEffect(() => {
 	z-index: 1; /* capa uno */
 	}
 
-.oficial_logo{
+.oficial_logo {
 	width: 100%;
 	display: flex;
 	margin-left: 3.5rem;
 	margin-top: 3.5rem;
 	}
 
-.navbar_input{
+.navbar_input {
 	grid-area: input;
 	position: relative;
 	margin-left: 3rem;
 	}
 
-.input_single{
-	padding: 2rem;
-	margin-top: 2rem;
-	width: 60rem;
-	height: 5rem;
-	border-radius: 1rem;
-	background-color: var(--color-hover);
-	border: none;
-	transition: background-color 0.3s;
-	}
-
-.input_single:hover{
-	background-color: var(--color-hover-two);
-	opacity: 2;
-}
-
-.navbar-button__create{
+.navbar-button__create {
 	grid-area: button;
 	margin-left: 10rem;
 }
 
-.create__button{
+.create__button {
 	padding: 1.6rem;
 	display: flex;
 	padding-left: 2rem;
@@ -162,12 +147,12 @@ watchEffect(() => {
 	border: none;
 }
 
-.button__icon{
+.button__icon {
 	width: 2rem;
 	height: 2rem;
 	margin-left: 0.5rem;
 }
-.button__text{
+.button__text {
 	margin-left: 0.5rem;
 	font-weight: 650;
 	color: var(--color-black);
@@ -194,7 +179,7 @@ watchEffect(() => {
   display: block;
 }
 
-.dropdown__button{
+.dropdown__button {
 	padding: 1.6rem;
 	display: flex;
 	padding-left: 1rem;
@@ -208,13 +193,13 @@ watchEffect(() => {
 	font-weight: 510;
 }
 
-.button__icon-dropdown{
+.button__icon-dropdown {
 	width: 2rem;
 	height: 2rem;
 	margin-left: 4rem;
 }
 
-.button__text-dropdown{
+.button__text-dropdown {
 	margin-left: 0.5rem;
 	font-weight: 650;
 	color: var(--color-black);
@@ -226,12 +211,12 @@ watchEffect(() => {
 	opacity: 2;
 }
 
-.content__text{
+.content__text {
 	font-weight: 650;
 	color: var(--color-black);
 }
 
-.buttons__option{
+.buttons__option {
 	width: 20rem;
 	height: 5rem;
 	border-radius: 1.2rem;
@@ -242,33 +227,33 @@ watchEffect(() => {
 	border: none;
 }
 
-.buttons__option:hover{
+.buttons__option:hover {
 	background-color: var(--color-button-dropdown-red);
 	opacity: 2;
 }
 
-.content-option__new-user{
+.content-option__new-user {
 	margin-bottom: 3rem;
 	margin-top: 1rem;
 }
 
-.content-option__old-user{
+.content-option__old-user {
 	margin-bottom: 3rem;
 	margin-top: 3rem;
 }
 
-.dropdown__user-greet{
+.dropdown__user-greet {
 	margin-left: 1rem;
 	font-weight: 600;
 }
 
-.button__icon-user-check{
+.button__icon-user-check {
 	width: 2rem;
 	height: 2rem;
 	margin-left: 2.5rem;
 }
 
-.dropdown__user-name{
+.dropdown__user-name {
 	margin-left: 0.7rem;
 	font-weight: 400;
 }

@@ -44,6 +44,12 @@ const router = createRouter({
 			component: () => import('../views/IndexUserAccountView.vue'),
 			props: true,
 		},
+		{
+			path: '/edit-post/:id',
+			name: 'edit-post',
+			component: () => import('../views/EditPostView.vue'),
+			props: true,
+		}
   ]
 })
 

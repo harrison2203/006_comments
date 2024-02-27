@@ -1,5 +1,4 @@
 <script setup>
-import DeleteUserAccount from '../components/DeleteUserAccount.vue';
 import IndexUserPageComponent from '../components/IndexUserPageComponent.vue';
 import NavbarComponent from '../components/NavbarComponent.vue'
 import AsideComponent from '../components/AsideComponent.vue';
@@ -29,7 +28,6 @@ import AsideComponent from '../components/AsideComponent.vue';
 	grid-template-areas: "aside main";
 	grid-template-columns: 15% 50%;
 }
-
 
 .main{
 	margin-top: 4rem;

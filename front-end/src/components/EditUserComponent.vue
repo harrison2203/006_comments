@@ -1,23 +1,19 @@
 <script setup>
 import { ref, onMounted } from'vue';
 import { useUserStore } from '@/stores/User';
-import { format } from 'date-fns';
 import { RouterLink } from 'vue-router';
 
-
 const userStore = useUserStore();
-console.log('le user store', userStore);
-
-const isEditing = ref(false);
+console.log('le user storeeeeeeeeeeeeeeeeee', userStore);
+//const isEditing = ref(false);
 const newName = ref(userStore.user ? userStore.user.name || '' : "");
 const newEmail = ref(userStore.user ? userStore.user.email || '' : "");
 
 async function updateUserInformation() {
 	try {
 		await userStore.updateUser(newName.value, newEmail.value)
-
 		console.log("suceeessssss")
-		isEditing.value = false;
+		//isEditing.value = false;
 
 	} catch (error) {
 		console.log(error);
@@ -40,7 +36,7 @@ onMounted (() =>
 				</div>
 				<div class="user-info__creation-date">
 					<span class="user-info__span">Account creation date : </span>
-					<span class="user-info__span-information">{{ userStore.user.created_at }}</span>
+					<span class="user-info__span-information">{{ userStore.user.formatted_date }}</span>
 				</div>
 				<div class="user-info__name">
 					<span class="user-info__span">Name : </span>
@@ -53,7 +49,7 @@ onMounted (() =>
 			</div>
 			<div class="user-info__modify-button">
 				<RouterLink :to="{ name: 'userAccount', params: { id: userStore.user.id } }">
-					<button class="user-info__editing-button" @click="updateUserInformation">Confirmer</button>
+					<button class="user-info__editing-button" @click="updateUserInformation">Confirm</button>
 				</RouterLink>
 			</div>
 		</template>
@@ -112,5 +108,10 @@ onMounted (() =>
 
 .user-info__editing-button{
 	
+}
+
+.user-info__editing-button:hover {
+	background-color: var(--color-button-dropdown-red);
+	opacity: 2;
 }
 </style>

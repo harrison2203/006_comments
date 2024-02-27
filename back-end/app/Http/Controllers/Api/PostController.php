@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -104,7 +105,7 @@ class PostController extends Controller
 					$formattedDate = $onePost->created_at->format('Y-m-d');
 					$onePost->formatted_date = $formattedDate;
 
-					return response()->json(['message' => 'Your post :', 'post' => $onePost], 200);
+					return response()->json(['post' => $onePost], 200);
 			} else {
 					return response()->json(['error' => 'Post not found'], 404);
 			}
@@ -147,6 +148,7 @@ class PostController extends Controller
 											->first();
 
 			if($userPost){
+				Comment::where('post_id', $postId)->delete();
 				Post::destroy($postId);
 				return response()->json(['message' => 'Your post has been deleted'],201);
 			}else{

@@ -35,8 +35,12 @@ async function submitComment(){
 	height: 10rem;
 	padding: 2rem;
 	margin-left: 4rem;
+	border-radius: 2rem;
 }
 
+::placeholder {
+	font-weight: bold;
+}
 
 .textarea__button {
 	margin-left: 4rem;
@@ -56,5 +60,4 @@ async function submitComment(){
 	border: none;
 	margin-bottom: 4rem;
 }
-
 </style>
