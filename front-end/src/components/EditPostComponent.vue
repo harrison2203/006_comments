@@ -3,6 +3,7 @@ import { ref } from'vue';
 import { createToaster } from "@meforma/vue-toaster";
 import { usePostStore } from '@/stores/Post';
 import { RouterLink } from 'vue-router';
+import GeneralButtonComponent from './Buttons/GeneralButtonComponent.vue';
 
 const toaster = createToaster();
 const postStore = usePostStore();
@@ -10,6 +11,8 @@ const newTitle = ref("");
 const newContent = ref("");
 const postId = ref("");
 const post = ref([]);
+const buttonGoBack = "Go Back";
+const buttonEditPost = "Save";
 
 async function getPostById() {
 	try {
@@ -51,10 +54,10 @@ async function editPostComponent () {
 					</div>
 					<div class="container-edit__buttons">
 						<RouterLink to="/">
-							<button class="buttons__cancel-button">Go Back</button>
+							<GeneralButtonComponent :typeOfButton="buttonGoBack"></GeneralButtonComponent>
 						</RouterLink>
 						<RouterLink :to="{name: 'post', params: {id: element.id}}">
-							<button class="buttons__confirm-button" @click="editPostComponent()">Save</button>
+							<GeneralButtonComponent @click="editPostComponent()" :typeOfButton="buttonEditPost"></GeneralButtonComponent>
 						</RouterLink>
 					</div>
 				</div>
@@ -116,26 +119,6 @@ async function editPostComponent () {
 	margin-top: 10rem;
 	display: flex;
 	justify-content: space-evenly;
-
-}
-.buttons__cancel-button, .buttons__confirm-button {
-	width: 20rem;
-	height: 5rem;
-	border-radius: 1.2rem;
-	margin-top: 2rem;
-	background-color: var(--color-black);
-	color: var(--color-background);
-	font-weight: bold;
-	border: none;
-}
-
-.buttons__confirm-button:hover {
-	background-color: var(--color-button-dropdown-red);
-	opacity: 2;
-}
-.buttons__cancel-button:hover {
-	background-color: var(--color-principal);
-	opacity: 2;
 }
 </style>
 

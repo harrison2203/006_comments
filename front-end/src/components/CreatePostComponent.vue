@@ -1,15 +1,14 @@
 <script setup>
 import { usePostStore } from '@/stores/Post';
-import {ref, defineEmits } from'vue';
-import { createToaster } from "@meforma/vue-toaster";
+import {ref } from'vue';
 import { useRouter } from 'vue-router';
+import GeneralButtonComponent from './Buttons/GeneralButtonComponent.vue';
 
 const postStore = usePostStore();
 const postTitle= ref("");
 const postContent= ref("");
-const toaster = createToaster();
 const router = useRouter();
-const emits = (['test']);
+const buttonCreatePost = "Create";
 
 const postInfo =  ref({
 	errorMessage: '',
@@ -39,11 +38,11 @@ async function CreatePostComponent() {
 			<div class="input-textarea__container">
 				<textarea class="text-area__content" v-model="postContent" maxlength="600" placeholder="Text" id="content" name="content" type="text"></textarea>
 			</div>
-			<p v-if="postInfo.errorMessage" :style="{ fontSize: postInfo.invalidValues = '2rem', color:postInfo.invalidValues = 'red'}">
+			<p :class="{ 'handle__errors': postInfo.invalidValues }">
     		{{ postInfo.errorMessage }}
 			</p>
 				<div class="creation-router__button">
-					<button class="button-creation__post" @click="CreatePostComponent" type="submit">Create</button>
+					<GeneralButtonComponent  @click="CreatePostComponent" :typeOfButton="buttonCreatePost"></GeneralButtonComponent>
 				</div>
 		</form>
 	</div>
@@ -77,13 +76,11 @@ async function CreatePostComponent() {
 	border-color: black;
 	border-radius: 0.5rem;
 	font-weight: inherit;
-
 }
 .text-area__content, .input__title[type="text"] {
 	padding: 2rem;
 	font-weight: normal;
 }
-
 ::placeholder {
 	font-weight: bold;
 }
@@ -91,16 +88,9 @@ async function CreatePostComponent() {
 	display: flex;
 	justify-content: end;
 }
-.button-creation__post {
-	height: 4.8rem;
-	width: 25rem;
-	border-radius: 1rem;
-	margin-top: 5rem;
-}
 .dynanic {
 	margin-top: 2rem;
 	font-weight: bold;
 	color: red;
-
 }
 </style>

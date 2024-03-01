@@ -3,9 +3,11 @@ import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { createToaster } from "@meforma/vue-toaster";
 import { useCommentStore } from '@/stores/Comment';
+import GeneralButtonComponent from './Buttons/GeneralButtonComponent.vue';
 
 const commentStore = useCommentStore();
 const toaster = createToaster();
+const buttonNameComment = "Create Comment";
 const comment = ref("");
 
 async function submitComment(){
@@ -23,7 +25,7 @@ async function submitComment(){
 		<textarea class="textarea" v-model="comment" maxlength="300" placeholder="Add comment" id="comment" name="comment"></textarea>
 		<RouterLink to="">
 			<div class="textarea__button">
-				<button class= "textarea__style-button" @click="submitComment()">Create Comment</button>
+				<GeneralButtonComponent @click="submitComment()" :typeOfButton="buttonNameComment" ></GeneralButtonComponent>
 			</div>
 		</RouterLink>
 	</form>
@@ -37,27 +39,14 @@ async function submitComment(){
 	margin-left: 4rem;
 	border-radius: 2rem;
 }
-
 ::placeholder {
 	font-weight: bold;
 }
-
 .textarea__button {
 	margin-left: 4rem;
 	margin-top: 2rem;
 	display: flex;
 	justify-content:center;
 	width: 70rem;
-}
-.textarea__style-button {
-	width: 20rem;
-	height: 5rem;
-	border-radius: 1.2rem;
-	margin-top: 2rem;
-	background-color: var(--color-black);
-	color: var(--color-background);
-	font-weight: bold;
-	border: none;
-	margin-bottom: 4rem;
 }
 </style>

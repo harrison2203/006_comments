@@ -42,7 +42,7 @@ userData();
 	<div v-else>
 			<a class="list_link">
 				<slot>
-					<a>My account</a>
+					My account
 				</slot>
 			</a>
 	</div>

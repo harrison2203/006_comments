@@ -114,7 +114,7 @@ indexPosts();
 .container__post {
 	background-color: var(--color-post);
 	border-radius: 1rem;
-	margin-bottom: 1.5rem;
+	margin-bottom: 4rem;
 	margin-left: 4rem;
 	width: 70rem;
 	height: 40rem;
@@ -145,7 +145,6 @@ indexPosts();
 	margin-right: 1rem;
 	margin-bottom: 1rem;
 }
-
 /* si la condition userId === element.user.id s'applique donc la class dropdown devient visible */
 .user-post:hover .dropdown {
 	display: block;

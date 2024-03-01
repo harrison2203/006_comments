@@ -5,6 +5,7 @@ import LogoutComponent from '../components/LogoutComponent.vue';
 import { useAuthStore } from '@/stores/Auth';
 import { useUserStore } from '@/stores/User';
 import SearchBarComponent from './SearchBarComponent.vue';
+import GeneralButtonComponent from './Buttons/GeneralButtonComponent.vue';
 
 const userStore = useUserStore();
 const authUser = useAuthStore();
@@ -12,6 +13,8 @@ console.log('le store est ici', authUser);
 const isLogged = computed(() => authUser.isAuthenticated);
 const noUser = computed(() => userStore.user);
 let getFirstName = ref();
+const buttonSignIn = "Sign In";
+const buttonLogIn = "Log In";
 const emits = defineEmits(['search-result-updated', 'user-input-value']);
 
 // this function gets the result from the searchBar component and sends it to the HomeView.vue
@@ -68,13 +71,13 @@ watchEffect(() => {
 						<div class="content-option__new-user">
 							<span class="content__text">New User ?</span>
 							<RouterLink to="/register">
-								<button class="buttons__option">Sign Up</button>
+								<GeneralButtonComponent :type-of-button="buttonSignIn"></GeneralButtonComponent>
 							</RouterLink>
 						</div>
 						<div class="content-option__old-user">
 							<span class="content__text">Old User ?</span>
 							<RouterLink to="/login">
-								<button class="buttons__option">Login</button>
+								<GeneralButtonComponent :type-of-button="buttonLogIn"></GeneralButtonComponent>
 							</RouterLink>
 						</div>
 					</div>
@@ -214,22 +217,6 @@ watchEffect(() => {
 .content__text {
 	font-weight: 650;
 	color: var(--color-black);
-}
-
-.buttons__option {
-	width: 20rem;
-	height: 5rem;
-	border-radius: 1.2rem;
-	margin-top: 2rem;
-	background-color: var(--color-black);
-	color: var(--color-background);
-	font-weight: bold;
-	border: none;
-}
-
-.buttons__option:hover {
-	background-color: var(--color-button-dropdown-red);
-	opacity: 2;
 }
 
 .content-option__new-user {

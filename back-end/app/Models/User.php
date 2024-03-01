@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
@@ -46,13 +47,23 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+		//One user has many posts.
 		public function posts(): HasMany
 		{
 			 return $this->hasMany(Post::class);
 		}
 
+		//one user has many comments.
 		public function comments(): HasMany
 		{
 			return $this->HasMany(Comment::class);
+		}
+
+		public function favoritePosts(): BelongsToMany
+		{
+			return $this->belongsToMany(Post::class, 'user-favorite-posts', 'user_id', 'post_id')
+										->as('favoritePosts')
+										->withTimestamps()
+										->orderByPivot('created_at', 'desc');
 		}
 }

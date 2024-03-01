@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import AsideComponent from '../components/AsideComponent.vue';
 import IndexPostsComponent from '../components/IndexPostsComponent.vue';
 import NavbarComponent from '../components/NavbarComponent.vue'
+import FooterComponent from '../components/FooterComponent.vue';
 
 const searchResults = ref([]);
 const searchTerm = ref("");
@@ -33,6 +34,10 @@ const userSearchBarValue = (userValueData) => {
 			<IndexPostsComponent :searchResultsProp="searchResults" :inputValueProp="searchTerm"/>
 		</main>
 	</div>
+
+	<footer>
+		<FooterComponent/>
+	</footer>
 </template>
 
 <style scoped>

@@ -1,12 +1,14 @@
 <script setup>
-import { ref, defineProps } from'vue';
+import { ref } from'vue';
 import { useUserStore } from '@/stores/User';
 import { useAuthStore } from '@/stores/Auth';
 import { RouterLink } from 'vue-router';
+import GeneralButtonComponent from './Buttons/GeneralButtonComponent.vue';
 
 const userStore = useUserStore();
 const authStore = useAuthStore();
-console.log('je logge le auth store',authStore)
+console.log('je logge le auth store',authStore);
+const buttonName = "Delete Account";
 let el = ref();
 
 async function deleteUserFunction() {
@@ -62,7 +64,7 @@ function deleteUserModal() {
 
 <template>
 	<main  v-if="userStore.user">
-				<button class="myBtn" @click="deleteUserModal()" >Delete Account</button>
+				<GeneralButtonComponent :type-of-button="buttonName" @click="deleteUserModal()"></GeneralButtonComponent>
 			<div  class="modal" id="container">
 				<div class="modal-content">
 					<h1 class="modal__title">Delete Account ?</h1>
@@ -83,20 +85,6 @@ function deleteUserModal() {
 </template>
 
 <style scoped>
-.myBtn{
-	width: 20rem;
-	height: 5rem;
-	border-radius: 1.2rem;
-	margin-top: 2rem;
-	background-color: var(--color-black);
-	color: var(--color-background);
-	font-weight: bold;
-	border: none;
-}
-.myBtn:hover {
-	background-color: var(--color-button-dropdown-red);
-	opacity: 2;
-}
 .modal {
 	position: fixed;
 	z-index: 1;

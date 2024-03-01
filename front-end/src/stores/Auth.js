@@ -18,7 +18,30 @@ export const useAuthStore = defineStore('Auth', () => {
     localStorage.setItem('authData', JSON.stringify(data));
   };
 
-	async function Authentification(email, password) {
+
+	async function singInStore (name, email, password) {
+		try {
+			axios.defaults.headers.common['Content-Type'] = 'application/json';
+			const response = await axios.post('http://localhost:8000/api/create-user',
+			{
+				name: name,
+				email: email,
+				password: password,
+			});
+			console.log("ACCOUNT", response);
+			if(response.status === 201) {
+				console.log(`${response.data.message}`);
+
+			} else {
+				console.error(`delete error: ${response.data.error}`);
+			}
+
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+	async function authentification(email, password) {
 		try {
 			const response = await axios.post('http://localhost:8000/api/login', {
 				email : email,
@@ -50,8 +73,7 @@ export const useAuthStore = defineStore('Auth', () => {
     }
   });
 
-
-	async function Logout() {
+	async function logout() {
 		try {
 			const response = await axios.post('http://localhost:8000/api/logout',
 			{},{
@@ -80,7 +102,8 @@ export const useAuthStore = defineStore('Auth', () => {
 		isAuthenticated,
 		token,
 		user,
-		Authentification,
-		Logout,
+		authentification,
+		logout,
+		singInStore,
 	}
 })

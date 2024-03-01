@@ -9,7 +9,7 @@ const router = useRouter();
 
 const redirectTo = () => {
   if (authStore.isAuthenticated) {
-		router.replace('/')
+		router.push('/')
 	}
 }
 

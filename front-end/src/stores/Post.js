@@ -94,10 +94,12 @@ export const usePostStore = defineStore('Post', () => {
 	async function createPost(title,content) {
 		try {
 			const userId = authStore.user.id;
-			const response = await axios.post(`http://localhost:8000/api/user/${userId}/post/`, {
+			const response = await axios.post(`http://localhost:8000/api/user/${userId}/post/`,
+			{
 				title : title,
 				content : content,
-			}, {
+			}, 
+			{
 				headers: {
           Authorization: `Bearer ${authStore.token}`,
 				}

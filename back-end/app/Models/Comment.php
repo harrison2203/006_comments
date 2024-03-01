@@ -15,7 +15,7 @@ class Comment extends Model
 		];
 
 		/**
-		 * A comment has one unique User
+		 * A comment is related to one User
 		 */
 		public function user(): BelongsTo
 		{

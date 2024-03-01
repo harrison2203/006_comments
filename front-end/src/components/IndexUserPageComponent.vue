@@ -4,11 +4,13 @@ import { useUserStore } from '@/stores/User';
 import { RouterLink } from 'vue-router';
 import DeleteUserComponent from '../components/DeleteUserComponent.vue';
 import { createToaster } from "@meforma/vue-toaster";
+import GeneralButtonComponent from './Buttons/GeneralButtonComponent.vue';
 
 const toaster = createToaster();
 const userStore = useUserStore();
 console.log('ce par ici', userStore)
 const user = ref([]);
+const buttonName = "Edit Account";
 
 async function indexUserInformation() {
 	try {
@@ -47,7 +49,7 @@ indexUserInformation();
 			</div>
 			<div class="user-info__buttons">
 				<RouterLink :to="{ name: 'update', params: { id: user.id } }">
-					<button class="user-info__editing-button">Modifier</button>
+					<GeneralButtonComponent :typeOfButton="buttonName"></GeneralButtonComponent>
 				</RouterLink>
 				<DeleteUserComponent/>
 			</div>
@@ -77,21 +79,7 @@ indexUserInformation();
 	display: flex;
 	justify-content: space-around;
 }
-.user-info__editing-button {
-	width: 20rem;
-	height: 5rem;
-	border-radius: 1.2rem;
-	margin-top: 2rem;
-	background-color: var(--color-black);
-	color: var(--color-background);
-	font-weight: bold;
-	border: none;
-}
 
-.user-info__editing-button:hover {
-	background-color: var(--color-button-dropdown-red);
-	opacity: 2;
-}
 .user-info__id, .user-info__name, .user-info__email {
 	margin-bottom: 1rem;
 }

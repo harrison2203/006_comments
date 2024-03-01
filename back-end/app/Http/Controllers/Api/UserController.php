@@ -60,7 +60,6 @@ class UserController extends Controller
 			}
 		}
 	}
-
 	/**
 	 * Update one user by id (connected user)
 	 */
@@ -81,7 +80,6 @@ class UserController extends Controller
 			return response()->json(['message' => 'User updated', "user" => $userInformation], 201);
 		}
 	}
-
 	/**
 	 * Delete an user
 	 */
