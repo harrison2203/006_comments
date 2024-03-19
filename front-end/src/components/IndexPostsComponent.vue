@@ -13,7 +13,7 @@ const props = defineProps({
 	inputValueProp: String
 });
 
-// cette fonction évalue le changement d'id automatiquement grâce à computed
+// This function automatically evaluates the change of ID using computed.
 const userId = computed(() => {
     if (userStore.user) {
         return userStore.user.id;
@@ -30,7 +30,6 @@ async function indexPosts() {
 	isDataLoaded.value = true;
 	};
 }
-
 indexPosts();
 </script>
 
@@ -130,8 +129,8 @@ indexPosts();
   color: var(	--color-titles);
 }
 .post__title {
-	font-size: 3rem;
-	margin-bottom: 2rem;
+	margin-top: 1rem;
+	font-size: 4rem;
 }
 .post__content {
 	font-size: 2rem;
@@ -139,6 +138,14 @@ indexPosts();
 .post-description__container {
 	display: flex;
 	align-items:baseline;
+}
+.post-author__name {
+	font-size: medium;
+	font-weight: 600;
+}
+.post-author__time {
+	font-size: x-small;
+	font-weight: lighter;
 }
 .point_logo {
 	margin-left: 1rem;

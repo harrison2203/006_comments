@@ -8,6 +8,11 @@ import '@fortawesome/fontawesome-free/css/all.css';
 const app = createApp(App)
 const pinia = createPinia();
 
+
+import {Cloudinary} from "@cloudinary/url-gen";
+
+const cld = new Cloudinary({cloud: {cloudName: '<cloud_name>',},});
+
 app.use(pinia)
 app.use(router)
 

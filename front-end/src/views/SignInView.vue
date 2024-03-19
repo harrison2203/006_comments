@@ -1,23 +1,14 @@
 <script setup>
 import NavbarComponent from '../components/NavbarComponent.vue'
 import SignInComponent from '../components/SignInComponent.vue';
-
 </script>
-
 
 <template>
 	<header>
-    <NavbarComponent/>
+		<NavbarComponent/>
 	</header>
-	
 	<main>
-		<div class="test">
-			<SignInComponent/>
-		</div>
+		<SignInComponent/>
 	</main>
 </template>
 
-<style scoped>
-
-
-</style>

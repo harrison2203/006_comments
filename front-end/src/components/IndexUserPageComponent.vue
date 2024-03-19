@@ -20,9 +20,7 @@ async function indexUserInformation() {
 		toaster.error(error);
 	}
 }
-
 indexUserInformation();
-
 </script>
 
 <template>

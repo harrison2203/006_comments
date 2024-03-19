@@ -4,18 +4,26 @@ import { RouterLink } from 'vue-router';
 import { createToaster } from "@meforma/vue-toaster";
 import { useCommentStore } from '@/stores/Comment';
 import GeneralButtonComponent from './Buttons/GeneralButtonComponent.vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const commentStore = useCommentStore();
 const toaster = createToaster();
 const buttonNameComment = "Create Comment";
 const comment = ref("");
 
+const commentInfo =  ref({
+	errorMessage: '',
+	invalidValues : null,
+})
+
 async function submitComment(){
 	try {
 		await commentStore.createComment(comment.value);
-		toaster.success('comment created');
+		window.location.reload();
 	} catch (error) {
-		console.error('error happened during your comment');
+		commentInfo.value.invalidValues = true;
+		commentInfo.value.errorMessage = "Not empty value is accepted";
 	}
 }
 </script>
@@ -23,6 +31,9 @@ async function submitComment(){
 <template>
 	<form>
 		<textarea class="textarea" v-model="comment" maxlength="300" placeholder="Add comment" id="comment" name="comment"></textarea>
+		<p :class="{ 'handle__errors': commentInfo.invalidValues }">
+    		{{ commentInfo.errorMessage }}
+			</p>
 		<RouterLink to="">
 			<div class="textarea__button">
 				<GeneralButtonComponent @click="submitComment()" :typeOfButton="buttonNameComment" ></GeneralButtonComponent>
@@ -48,5 +59,11 @@ async function submitComment(){
 	display: flex;
 	justify-content:center;
 	width: 70rem;
+}
+.handle__errors {
+	margin-left: 5rem;
+	margin-top: 2rem;
+	font-weight: bold;
+	color: red;
 }
 </style>

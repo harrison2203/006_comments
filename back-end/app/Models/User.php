@@ -58,10 +58,12 @@ class User extends Authenticatable
 		{
 			return $this->HasMany(Comment::class);
 		}
-
+		/**
+		 * one user can have many favorite posts
+		 */
 		public function favoritePosts(): BelongsToMany
 		{
-			return $this->belongsToMany(Post::class, 'user-favorite-posts', 'user_id', 'post_id')
+			return $this->belongsToMany(Post::class, 'user_favorite_posts', 'user_id', 'post_id')
 										->as('favoritePosts')
 										->withTimestamps()
 										->orderByPivot('created_at', 'desc');

@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from'vue';
 import EditUserComponent from '../components/EditUserComponent.vue';
 import NavbarComponent from '../components/NavbarComponent.vue'
 import AsideComponent from '../components/AsideComponent.vue';
@@ -13,7 +12,6 @@ import AsideComponent from '../components/AsideComponent.vue';
 		<aside class="aside">
 			<AsideComponent/>
 		</aside>
-
 		<main class="main">
 			<div class="main__user-page">
 				<EditUserComponent/>
@@ -28,7 +26,6 @@ import AsideComponent from '../components/AsideComponent.vue';
 	grid-template-areas: "aside main";
 	grid-template-columns: 15% 60%;
 }
-
 .main{
 	margin-top: 4rem;
 	padding-left: 7.5rem;

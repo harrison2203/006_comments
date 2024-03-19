@@ -32,10 +32,12 @@ class Post extends Model
 		{
 			return $this-> hasMany(Comment::class, 'post_id');
 		}
-
+		/**
+		 * one favorite post can have many users
+		 */
 		public function users(): BelongsToMany
 		{
-			return $this->belongsToMany(User::class);
+			return $this->belongsToMany(User::class, 'user_favorite_posts','post_id', 'user_id');
 		}
 }
 

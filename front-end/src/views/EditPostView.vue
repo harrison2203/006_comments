@@ -1,8 +1,6 @@
 <script setup>
 import NavbarComponent from '../components/NavbarComponent.vue'
-import SinglePostComponent from '../components/SinglePostComponent.vue';
 import EditPostComponent from '../components/EditPostComponent.vue';
-
 import AsideComponent from '../components/AsideComponent.vue';
 </script>
 

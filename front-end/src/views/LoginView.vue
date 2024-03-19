@@ -12,7 +12,6 @@ const redirectTo = () => {
 		router.push('/')
 	}
 }
-
 redirectTo();
 </script>
 

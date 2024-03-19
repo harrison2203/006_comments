@@ -88,7 +88,7 @@ async function CreatePostComponent() {
 	display: flex;
 	justify-content: end;
 }
-.dynanic {
+.handle__errors {
 	margin-top: 2rem;
 	font-weight: bold;
 	color: red;

@@ -1,4 +1,5 @@
 <script setup>
+
 </script>
 
 <template>
@@ -12,7 +13,8 @@
 <style scoped>
 .footer {
 	background-color: bisque;
-	padding: 3rem;
+	height: 5rem;
+	position: relative;
 }
 
 </style>

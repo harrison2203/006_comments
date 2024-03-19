@@ -36,7 +36,8 @@ async function editPostComponent () {
 	console.log('LE TEST', postId)
 	try {
 		await postStore.editPost(newTitle.value, newContent.value, postId.value)
-		toaster.success("post created with success")
+		toaster.success("post created with success");
+		window.location.reload();
 	} catch (error) {
 		toaster.error('erreur', error);
 	}

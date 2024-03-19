@@ -47,7 +47,6 @@ class PostController extends Controller
 				'title' => ['required', 'string'],
 				'content' => ['required', 'string'],
 		]);
-
 		if (Auth::check()) {
 				$loggedInUserId = Auth::id();
 

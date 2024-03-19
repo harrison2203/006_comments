@@ -103,4 +103,24 @@ class UserController extends Controller
 			return response()->json(['message' => 'user not found'], 404);
 		}
 	}
+
+
+
+	public function favorites($postId)
+	{
+			if (Auth::check()) {
+					$user = Auth::user();
+					$post = Post::find($postId);
+	
+					if (!$post) {
+							return response()->json(['error' => 'Post not found'], 404);
+					}
+	
+					$user->favorite_posts()->attach($post);
+	
+					return response()->json(['message' => 'Post added to favorites']);
+			}
+	
+			return response()->json(['error' => 'Unauthorized'], 401);
+	}
 }

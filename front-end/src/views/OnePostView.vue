@@ -7,12 +7,10 @@ import AsideComponent from '../components/AsideComponent.vue';
 
 </script>
 
-
 <template>
   <header>
     <NavbarComponent/>
 	</header>
-
 	<div class="container__view">
 		<aside class="aside">
 			<AsideComponent/>

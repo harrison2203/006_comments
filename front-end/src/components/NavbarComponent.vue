@@ -49,7 +49,7 @@ watchEffect(() => {
 	<nav class="navbar">
 			<div class="navbar_image">
 				<RouterLink to="/">
-					<img src="../assets/Icons/Oficial.svg" class="oficial_logo" alt="icon_navbar">
+					<img src="https://res.cloudinary.com/didthhgmq/image/upload/v1709670144/it_1_aazvp0.png" class="oficial_logo" alt="icon_navbar">
 				</RouterLink>
 			</div>
 			<SearchBarComponent  @search-result-updated="searchBarResult" @user-input-value="userSearchBarValue"/>
@@ -113,17 +113,16 @@ watchEffect(() => {
 .navbar_image {
 	grid-area: image;
 	position: relative;
-	width: 3rem;
 	display: inline-block;
-	margin-left: 8rem;
 	z-index: 1; /* capa uno */
 	}
 
 .oficial_logo {
-	width: 100%;
+	width: 	20rem;
+	height: 4rem;
 	display: flex;
-	margin-left: 3.5rem;
-	margin-top: 3.5rem;
+	margin-left: 5rem;
+	margin-top: 2rem;
 	}
 
 .navbar_input {
