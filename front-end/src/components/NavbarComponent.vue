@@ -11,6 +11,7 @@ const userStore = useUserStore();
 const authUser = useAuthStore();
 console.log('le store est ici', authUser);
 const isLogged = computed(() => authUser.isAuthenticated);
+console.log("IL EST LOGGE OU PAS",isLogged)
 const noUser = computed(() => userStore.user);
 let getFirstName = ref();
 const buttonSignIn = "Sign In";
@@ -108,14 +109,14 @@ watchEffect(() => {
 	grid-template-columns: 20% 40% 20% 20%;
 	border-bottom: 1px solid var(--color-hover-two);
 	margin-bottom: 10px
-	}
+}
 
 .navbar_image {
 	grid-area: image;
 	position: relative;
 	display: inline-block;
 	z-index: 1; /* capa uno */
-	}
+}
 
 .oficial_logo {
 	width: 	20rem;
@@ -123,13 +124,13 @@ watchEffect(() => {
 	display: flex;
 	margin-left: 5rem;
 	margin-top: 2rem;
-	}
+}
 
 .navbar_input {
 	grid-area: input;
 	position: relative;
 	margin-left: 3rem;
-	}
+}
 
 .navbar-button__create {
 	grid-area: button;

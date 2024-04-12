@@ -24,7 +24,7 @@ async function updateUserInformation() {
 }
 
 onMounted (() =>
-		updateUserInformation
+	updateUserInformation
 ) 
 </script>
 

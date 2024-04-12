@@ -108,7 +108,7 @@ indexPosts();
 <style scoped>
 .main__container {
 	margin-top: 4rem;
-	border-left: 1px solid var(--color-hover-two);
+	border-left: 4px solid var(--color-hover-two);
 }
 .container__post {
 	background-color: var(--color-post);

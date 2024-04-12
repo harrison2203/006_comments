@@ -1,10 +1,13 @@
 <script setup>
-import { usePostStore } from '@/stores/Post';
+import { usePostStore } from '@/stores/Post'
+import { useAuthStore } from '@/stores/Auth';
 import {ref } from'vue';
 import { useRouter } from 'vue-router';
 import GeneralButtonComponent from './Buttons/GeneralButtonComponent.vue';
 
 const postStore = usePostStore();
+const authUser = useAuthStore();
+console.log('LE STORE POST COMPONENT',authUser.isAuthenticated)
 const postTitle= ref("");
 const postContent= ref("");
 const router = useRouter();
@@ -14,6 +17,9 @@ const postInfo =  ref({
 	errorMessage: '',
 	invalidValues : null,
 })
+
+
+
 
 async function CreatePostComponent() {
 	try {

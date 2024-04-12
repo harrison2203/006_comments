@@ -5,7 +5,6 @@ import { ref, } from 'vue'
 import { createToaster } from "@meforma/vue-toaster";
 import LoginSigninButtonComponent from './Buttons/LoginSigninButtonComponent.vue';
 
-
 const authStore = useAuthStore();
 const userEmail = ref("");
 const userPassword = ref("");
