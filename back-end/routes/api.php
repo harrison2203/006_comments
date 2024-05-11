@@ -34,8 +34,7 @@ Route::middleware('auth:sanctum')->group(function () {
 		Route::post('/createComment/{postId}', [CommentController::class, 'createComment']);
 		Route::delete('/user/{user_Id}/deleteComment/{commentId}', [CommentController::class, 'deleteComment']);
 	});
-	
-	
+
 	Route::get('/posts', [PostController::class, 'indexPost']); // ok
 	Route::get('/post/{postId}', [PostController::class, 'showOnePost']); // ok
 	Route::get('/comments/{postId}', [CommentController::class, 'getComments']); //ok

@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@cloudinary/url-gen": "^1.19.0",
-    "@cloudinary/vue": "^1.12.1",
-    "cloudinary-vue": "^1.2.4"
-  }
-}

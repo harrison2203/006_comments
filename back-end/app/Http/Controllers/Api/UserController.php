@@ -104,8 +104,6 @@ class UserController extends Controller
 		}
 	}
 
-
-
 	public function favorites($postId)
 	{
 			if (Auth::check()) {
