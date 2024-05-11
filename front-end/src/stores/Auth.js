@@ -3,8 +3,8 @@ import { defineStore } from 'pinia';
 import { createToaster } from "@meforma/vue-toaster";
 import axios from 'axios';
 
-export const useAuthStore = defineStore('Auth', () => {
 
+export const useAuthStore = defineStore('Auth', () => {
 	const toaster = createToaster();
 	const isAuthenticated = ref(false);
 	const token = ref(null);

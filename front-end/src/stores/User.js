@@ -4,8 +4,8 @@ import { createToaster } from "@meforma/vue-toaster";
 import axios from 'axios';
 import { useAuthStore } from '@/stores/Auth';
 
-export const useUserStore = defineStore('User', () => {
 
+export const useUserStore = defineStore('User', () => {
 	const toaster = createToaster();
 	const isAuthenticated = ref(false);
 	const user = ref(null);
@@ -16,6 +16,7 @@ export const useUserStore = defineStore('User', () => {
 		isAuthenticated.value = true;
 		user.value = data.user;
   };
+
 
 	async function getUsers() {
 		try {
@@ -85,10 +86,9 @@ export const useUserStore = defineStore('User', () => {
 
 	async function deleteUser() {
 		try{
-			console.log('LE LOGGGGGGGGGGGGGGGGGGG')
 			const userId = authStore.user.id;
 			console.log('authStore', authStore.token)
-			console.log('USER ID', userId);
+			console.log('user id', userId);
 			const response = await axios.delete(`http://localhost:8000/api/user/delete/${userId}`,
 			{
 				headers: {

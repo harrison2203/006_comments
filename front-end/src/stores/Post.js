@@ -18,6 +18,7 @@ export const usePostStore = defineStore('Post', () => {
 	const resultSearchBar = ref([]);
 	let route = useRoute();
 
+
 	async function getPosts() {
 		try {
 			const response = await axios.get('http://localhost:8000/api/posts')
