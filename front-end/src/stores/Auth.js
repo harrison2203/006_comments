@@ -91,7 +91,7 @@ export const useAuthStore = defineStore('Auth', () => {
 				return isAuthenticated.value;
 				
 			}else{
-				toaster.error('ERRORCITO')
+				toaster.error('error')
 			}
 		} catch (error) {
 			toaster.error('You are already logged out');

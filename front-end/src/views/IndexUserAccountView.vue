@@ -3,7 +3,6 @@ import IndexUserPageComponent from '../components/IndexUserPageComponent.vue';
 import NavbarComponent from '../components/NavbarComponent.vue'
 import AsideComponent from '../components/AsideComponent.vue';
 
-
 </script>
 
 <template>

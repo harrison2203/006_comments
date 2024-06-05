@@ -52,4 +52,5 @@ onMounted(() => {
 	height: 15rem;
 	padding: 2rem;
 }
+
 </style>

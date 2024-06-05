@@ -30,7 +30,7 @@ export const usePostStore = defineStore('Post', () => {
 				toaster.error('any post here');
 			}
 		} catch (error) {
-			console.log("something wrong happened")
+			console.log("something wrong happened");
 		}
 	}
 
@@ -41,9 +41,8 @@ export const usePostStore = defineStore('Post', () => {
 
 			if(response.status === 200){
 				post.value = response.data;
-				console.log('la value de mon post', post.value)
 				toaster.success(`${response.data.message}`);
-			} else {222
+			} else {
 				toaster.error('error here');
 			}
 		} catch (error) {
@@ -54,7 +53,6 @@ export const usePostStore = defineStore('Post', () => {
 	async function deletePost(postId) {
 		try {
 			const userId = authStore.user.id;
-			console.log('VARIABLE POST ID',postId)
 			const response = await axios.delete(`http://localhost:8000/api/user/${userId}/delete/${postId}`,
 			{
 				headers: {

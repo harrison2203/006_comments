@@ -85,6 +85,7 @@ function deleteUserModal() {
 </template>
 
 <style scoped>
+
 .modal {
 	position: fixed;
 	z-index: 1;
@@ -144,4 +145,5 @@ function deleteUserModal() {
 .buttons__position {
 	margin-left: 1.8rem;
 }
+
 </style>

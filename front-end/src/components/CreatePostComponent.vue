@@ -18,7 +18,10 @@ const postInfo =  ref({
 	invalidValues : null,
 })
 
-
+const authInfo = ref({
+	authErrorMessage : '',
+	invalidAuth: null,
+})
 
 
 async function CreatePostComponent() {
@@ -28,8 +31,12 @@ async function CreatePostComponent() {
 			postContent.value = "";
 			router.push('/')
   } catch (error) {
-		postInfo.value.invalidValues = true;
-		postInfo.value.errorMessage = "Both values are required";
+		if (authUser.isAuthenticated === false) {
+			authInfo.value.authErrorMessage = "You are not connected";
+		} else {
+			postInfo.value.errorMessage = "Both values are required";
+			postInfo.value.invalidValues = true;
+		}
   }
 }
 </script>
@@ -44,17 +51,21 @@ async function CreatePostComponent() {
 			<div class="input-textarea__container">
 				<textarea class="text-area__content" v-model="postContent" maxlength="600" placeholder="Text" id="content" name="content" type="text"></textarea>
 			</div>
-			<p :class="{ 'handle__errors': postInfo.invalidValues }">
-    		{{ postInfo.errorMessage }}
-			</p>
-				<div class="creation-router__button">
-					<GeneralButtonComponent  @click="CreatePostComponent" :typeOfButton="buttonCreatePost"></GeneralButtonComponent>
-				</div>
+				<p :class="{ 'handle__errors': postInfo.invalidValues }">
+					{{ postInfo.errorMessage }}
+				</p>
+				<p :class="{ 'handle__errors': authInfo.invalidAuth }">
+					{{ authInfo.authErrorMessage }}
+				</p>
+			<div class="creation-router__button">
+				<GeneralButtonComponent @click="CreatePostComponent" :typeOfButton="buttonCreatePost"></GeneralButtonComponent>
+			</div>
 		</form>
 	</div>
 </template>
 
 <style scoped>
+
 .main-post__container {
 	display: flex;
 	flex-direction: column;
@@ -62,11 +73,13 @@ async function CreatePostComponent() {
 	align-items: center;
 	height: 70rem;
 }
+
 .general__title {
 	font-weight: bold;
 	text-align: left;
 	margin-bottom: 2rem;
 }
+
 .input__title {
 	height: 4.8rem;
 	width: 50rem;
@@ -74,6 +87,7 @@ async function CreatePostComponent() {
 	border-color: black;
 	border-radius: 0.5rem;
 }
+
 .text-area__content {
 	height: 18rem;
 	margin-top: 2rem;
@@ -83,20 +97,25 @@ async function CreatePostComponent() {
 	border-radius: 0.5rem;
 	font-weight: inherit;
 }
+
 .text-area__content, .input__title[type="text"] {
 	padding: 2rem;
 	font-weight: normal;
 }
+
 ::placeholder {
 	font-weight: bold;
 }
+
 .creation-router__button {
 	display: flex;
 	justify-content: end;
 }
+
 .handle__errors {
 	margin-top: 2rem;
 	font-weight: bold;
 	color: red;
 }
+
 </style>

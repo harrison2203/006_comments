@@ -43,6 +43,7 @@ async function submitComment(){
 </template>
 
 <style scoped>
+
 .textarea {
 	width: 70rem;
 	height: 10rem;
@@ -66,4 +67,5 @@ async function submitComment(){
 	font-weight: bold;
 	color: red;
 }
+
 </style>

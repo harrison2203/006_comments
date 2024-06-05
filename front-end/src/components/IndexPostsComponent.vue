@@ -15,11 +15,11 @@ const props = defineProps({
 
 // This function automatically evaluates the change of ID using computed.
 const userId = computed(() => {
-    if (userStore.user) {
-        return userStore.user.id;
-    } else {
-        return null;
-    }
+	if (userStore.user) {
+			return userStore.user.id;
+	} else {
+			return null;
+	}
 });
 console.log('computed', userId);
 
@@ -106,6 +106,7 @@ indexPosts();
 </template>
 
 <style scoped>
+
 .main__container {
 	margin-top: 4rem;
 	border-left: 4px solid var(--color-hover-two);
@@ -204,4 +205,5 @@ indexPosts();
 	display: block;
 	margin-bottom: 5px;
 }
+
 </style>

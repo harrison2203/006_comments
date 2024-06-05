@@ -93,6 +93,7 @@ async function signInUser () {
 </template>
 
 <style scoped>
+
 .container-signin__form {
 	display: flex;
   justify-content: center;
@@ -126,4 +127,5 @@ async function signInUser () {
 ::placeholder {
 	font-weight: bold;
 }
+
 </style>

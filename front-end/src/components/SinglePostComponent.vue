@@ -27,6 +27,7 @@ getPostById();
 </template>
 
 <style scoped>
+
 .container {
 	margin-top: 4rem;
 	border-left: 1px solid var(--color-hover-two);
@@ -46,4 +47,5 @@ getPostById();
 	opacity:2;
 	background-color: var(--color-hover)
 }
+
 </style>

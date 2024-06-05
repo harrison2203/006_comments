@@ -5,7 +5,7 @@ import { RouterLink } from 'vue-router';
 import GeneralButtonComponent from './Buttons/GeneralButtonComponent.vue';
 
 const userStore = useUserStore();
-console.log('le user storeeeeeeeeeeeeeeeeee', userStore);
+console.log('le user store', userStore);
 //const isEditing = ref(false);
 const newName = ref(userStore.user ? userStore.user.name || '' : "");
 const newEmail = ref(userStore.user ? userStore.user.email || '' : "");
@@ -15,9 +15,8 @@ const buttonNameEdit = "Go Back";
 async function updateUserInformation() {
 	try {
 		await userStore.updateUser(newName.value, newEmail.value)
-		console.log("suceeessssss")
+		console.log("success")
 		//isEditing.value = false;
-
 	} catch (error) {
 		console.log(error);
 	}
@@ -63,6 +62,7 @@ onMounted (() =>
 </template>
 
 <style scoped>
+
 .user-info__title {
 	margin-left: 15rem;
 	font-weight: bold;
@@ -95,4 +95,5 @@ onMounted (() =>
 	justify-content: space-around;
 	margin-right: 18rem;
 }
+
 </style>

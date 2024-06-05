@@ -11,7 +11,7 @@ const userStore = useUserStore();
 const authUser = useAuthStore();
 console.log('le store est ici', authUser);
 const isLogged = computed(() => authUser.isAuthenticated);
-console.log("IL EST LOGGE OU PAS",isLogged)
+console.log("hes logged or not",isLogged)
 const noUser = computed(() => userStore.user);
 let getFirstName = ref();
 const buttonSignIn = "Sign In";
@@ -115,7 +115,7 @@ watchEffect(() => {
 	grid-area: image;
 	position: relative;
 	display: inline-block;
-	z-index: 1; /* capa uno */
+	z-index: 1;
 }
 
 .oficial_logo {
@@ -155,6 +155,7 @@ watchEffect(() => {
 	height: 2rem;
 	margin-left: 0.5rem;
 }
+
 .button__text {
 	margin-left: 0.5rem;
 	font-weight: 650;

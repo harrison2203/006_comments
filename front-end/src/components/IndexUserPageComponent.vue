@@ -8,7 +8,6 @@ import GeneralButtonComponent from './Buttons/GeneralButtonComponent.vue';
 
 const toaster = createToaster();
 const userStore = useUserStore();
-console.log('ce par ici', userStore)
 const user = ref([]);
 const buttonName = "Edit Account";
 
@@ -59,6 +58,7 @@ indexUserInformation();
 </template>
 
 <style scoped>
+
 .user-info__title {
 	text-align: center;
 	font-weight: bold;
@@ -84,4 +84,5 @@ indexUserInformation();
 .user-info__span-information {
 	font-size: 2rem;
 }
+
 </style>

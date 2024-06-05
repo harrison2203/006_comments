@@ -67,6 +67,7 @@ async function editPostComponent () {
 </template>
 
 <style scoped>
+
 .container-edit {
 	margin-top: 4rem;
 	border-left: 1px solid var(--color-hover-two);
@@ -121,5 +122,6 @@ async function editPostComponent () {
 	display: flex;
 	justify-content: space-evenly;
 }
+
 </style>
 

@@ -31,6 +31,7 @@ import MyAccountButtonComponent from './Buttons/MyAccountButtonComponent.vue';
 </template>
 
 <style scoped>
+
 .layout {
 	margin-left: 6rem;
 	margin-top: 4rem;
@@ -57,4 +58,5 @@ import MyAccountButtonComponent from './Buttons/MyAccountButtonComponent.vue';
 	margin-left: 1rem;
 	color: var(--color-black);
 }
+
 </style>

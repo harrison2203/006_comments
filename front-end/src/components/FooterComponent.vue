@@ -11,6 +11,7 @@
 </template>
 
 <style scoped>
+
 .footer {
 	background-color: bisque;
 	height: 5rem;

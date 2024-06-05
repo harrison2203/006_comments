@@ -142,4 +142,5 @@ async function deletePostComponent(){
 .buttons__position {
 	margin-left: 1.8rem;
 }
+
 </style>

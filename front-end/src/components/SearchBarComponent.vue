@@ -58,6 +58,7 @@ searchBar();
 </template>
 
 <style scoped>
+
 .input_single{
 	padding: 2rem;
 	margin-top: 2rem;

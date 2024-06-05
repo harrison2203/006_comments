@@ -1,7 +1,7 @@
 <script setup>
 import { useAuthStore } from '@/stores/Auth';
 import { useRouter } from 'vue-router';
-import { ref, } from 'vue'
+import { ref } from 'vue'
 import { createToaster } from "@meforma/vue-toaster";
 import LoginSigninButtonComponent from './Buttons/LoginSigninButtonComponent.vue';
 
@@ -43,6 +43,7 @@ async function loginUser() {
 </template>
 
 <style scoped>
+
 .container-login__form {
 	display: flex;
 	flex-direction: column;
@@ -76,4 +77,5 @@ async function loginUser() {
 ::placeholder {
 	font-weight: bold;
 }
+
 </style>
