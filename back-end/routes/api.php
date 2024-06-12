@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\SearchController;
 
-// Routes pour gérer le Login
+
 Route::get('login', function () {
 	return [
 		'login',
